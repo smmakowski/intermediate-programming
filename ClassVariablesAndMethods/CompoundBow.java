@@ -33,7 +33,7 @@ public class CompoundBow {
   }
   // class method providing basic documentation
   public static void about() {
-    System.out.println("This method provides basic information for the CompoundBow class, which is designed to emulate generic Compound bows as manufacuted by a .");
+    System.out.println("This method provides basic information for the CompoundBow class.");
     System.out.println("1. Constructors and properties:");
     System.out.println("\t The CompoundBow constuctor takes 4 arguments... cams (int), ataLength, drawLength, and weight (double).");
     System.out.println("\t Class also includues additonal instance methods: speed (double), serial, and modelName (String)");

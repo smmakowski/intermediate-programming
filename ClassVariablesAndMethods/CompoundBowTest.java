@@ -18,7 +18,7 @@ public class CompoundBowTest {
     System.out.println("");
 
     System.out.println("BOW3N70.0 " + (CompoundBow.isValidSerial("BOW3N70.0") == true ? "IS" : "IS NOT") + " a valid serial."); // should say 'IS' (static method return true)
-    System.out.println("BOW6D70.0 " + (CompoundBow.isValidSerial("BOW6D70.0") == true ? "IS" : "IS NOT") + " a valid serial."); // should say 'IS' (static method return true)
+    System.out.println("BOW6D70.0 " + (CompoundBow.isValidSerial("BOW6DDDD70.0") == true ? "IS" : "IS NOT") + " a valid serial."); // should say 'IS' (static method return true)
 
     System.out.println("");
 

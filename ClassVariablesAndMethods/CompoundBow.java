@@ -29,7 +29,7 @@ public class CompoundBow {
   }
 
   public static boolean isValidSerial(String serial) { // class method to detect if an input serial number is valid
-    return (serial.indexOf(serial) != -1 ? true : false);
+    return (serials.indexOf(serial) != -1 ? true : false);
   }
   // class method providing basic documentation
   public static void about() {

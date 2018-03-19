@@ -27,4 +27,9 @@ public class Employee {
       return "{" + "\"monthlySalary\":" + " " + this.monthlySalary + "\"name\":" +
       " " + this.name + "}"; // in JSON format
   }
+
+  //Public getter for name (for use in Test.java wehn printing error messages)
+  public String getName() {
+    return this.name;
+  }
 }

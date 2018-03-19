@@ -19,7 +19,7 @@ public class Test {
   private static Employee[] year2014 = new Employee[10];
   private static Employee[] year2015 = new Employee[10];
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws FileNotFoundException, NumberFormatException {
     if (args.length == 0) { // if no file has been provided notify and exit
       System.out.println("ERROR: No file path has been provided. Now exiting...");
       System.exit(0); // exit with error code 1
@@ -27,6 +27,7 @@ public class Test {
 
     String filename = args[0];
 
+    readFile(filename);
     // try {
     //   readFile(fileName); // read file
     // } catch (FileNotFoundException e) { // exception handling incorrect file path
@@ -53,9 +54,14 @@ public class Test {
       while (scan.hasNext()) {
         lineText = scan.nextLine();
         if (!lineText.equals(EMPTYSTRING)) {
+          //System.out.println(lineText);
           parseLine(lineText);
+        } else {
+          System.out.println("e");
         }
       }
+
+      System.out.println("File has been Successfully Read");
     } catch (FileNotFoundException e) {
       System.out.println("ERROR: The provided file is incorrect or does not exist." +
       " Please make sure that you provided a correct file path argument when running this program." +
@@ -65,9 +71,9 @@ public class Test {
 
   }
 
-  private static void parseLine(String lineText) throws NumberFormatException{
+  private static void parseLine(String lineText) throws NumberFormatException, ArrayIndexOutOfBoundsException {
     String[] data = lineText.split(" ");
-    Employee employee = null;
+    Employee employee;
     try {
       // acquire data to pass into Employee (super
       int year = Integer.parseInt(data[0]);
@@ -92,6 +98,10 @@ public class Test {
       ". Please correct any typos and ensure that data in individual" +
       "lines is separated by spaces.");
       System.exit(0);
+    } catch (ArrayIndexOutOfBoundsException e) {
+      System.out.println("ERROR: One more lines may be missing a datum, likely" +
+      " the 'Annual Salary' or 'Stock Price'. Please check and make corrections to" +
+      " the .txt file.");
     }
   }
 
@@ -106,15 +116,15 @@ public class Test {
       }
       // iterate through array
       for (int i = 0; i < ARRAYLENGTH; i++) {
-        if (year2014[i].equals(null)) { // upon first empty spot
-          year2014[i] = employee; // assign
+        if (year2014[i] == null) { // upon first empty spot
+          year2014[i] = new Employee("tom", 100); // assign
           break; // exit loop
         }
       }
     } else if (year == 2015) {
       for (int i = 0; i < ARRAYLENGTH; i++) {
-        if (year2015[i].equals(null)) {
-          year2015[i] = employee;
+        if (year2015[i] == null) {
+          year2015[i] = new Employee("tom", 100);
           break;
         }
       }

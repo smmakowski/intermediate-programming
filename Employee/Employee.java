@@ -24,7 +24,7 @@ public class Employee {
 
   // returns object string
   public String toString() {
-      return "{" + "\"monthlySalary\":" + " " + this.monthlySalary + "\"name\":" +
+      return "{" + "\"monthlySalary\":" + " " + this.monthlySalary + ", \"name\":" +
       " " + this.name + "}"; // in JSON format
   }
 

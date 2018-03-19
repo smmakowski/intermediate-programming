@@ -4,8 +4,8 @@
 2015 Executive Scott,Michael 2000 12
 2015 Salesman Ramsay,Gordon 4500 350000
 2014 Executive Gates,Bill 6000 70
-2015 Salesman Fortuna,Bib 3200
-2015 Employee Crumb,Salacious 3000 170000
+2015 Salesman Fortuna,Bib 3200 88800
+2015 Employee Crumb,Salacious 3000
 2014 Executive TheHutt,Jabba 5000 55
 2014 Employee Smith,Matt 2100
 2015 Salesman Tennant,David 3050 20000

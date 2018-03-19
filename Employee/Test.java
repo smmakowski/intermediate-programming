@@ -12,9 +12,12 @@
   command-line argument: the path/name of the .txt file that you wish to read.
 */
 
+import java.io.*;
+import java.util.Scanner;
+
 public class Test {
-  private Object[] year2014 = new Object[];
-  private Object[] year2015 = new Object[];
+  private Object[] year2014 = new Object[10];
+  private Object[] year2015 = new Object[10];
 
   public static void main(String[] args) throws FileNotFoundException, NumberFormatException {
     if (args.length == 0) { // if no file has been provided notify and exit
@@ -39,40 +42,65 @@ public class Test {
       System.exit(0);
     }
   }
-}
 
+  private static void readFile(String filename) {
+    final String EMPTYSTRING = "";
+    Scanner scan = new Scanner(new File(filename));
+    String lineText = "";
+    int i = 0;
+    int j = 0;
 
-public class CrimeTest {
-	public static void main(String[] args) throws FileNotFoundException, NumberFormatException {
-		// get start time for using program
-		Date startTime = new Date();
-		// if argument provided
-		if (args.length > 0) {
-			Crime crimeData = new Crime();
-			try {
-				// read the file data with Crime class method
-				crimeData.readCrimeData(args[0]);
-				crimeData.promptUser(); // prompt user for questions until response 'Q' using method
+    while (scan.hasNext()) {
+      lineText = scan.nextLine();
+      if (!lineText.equals(EMPTYSTRING)) {
+        parseLine(lineText);
+      }
+    }
+  }
 
-				Date endTime = new Date(); // get end time by instantiating new object
+  private static void parseLine(String lineText) throws {
+    String[] data = lineText.split(' ');
+    try {
+      // acquire data to pass into Employee (super
+      int year = Integer.parseInt(data[0]);
+      String class = data[1];
+      String name  = formatName(data[2]); // format name with method and assign
+      int monthlySalary = Integer.parseInt(data[3]);
 
-				int difference = (int)((endTime.getTime() - startTime.getTime()) / 1000L); // calculate difference using long type and explicitly case as int
-				System.out.print("Thank you for trying the US Crimes Statistics Program.");
-				System.out.println("Elapsed time in seconds: " + difference);
+      // depending on class parse extra data and create object
+      if (class.equalsIgnoreCase("salesman")) {
+        int stockPrice = Integer.parseInt(data[4]);
 
-			} catch (FileNotFoundException e) {
-				// exit; since read crime data has it's own handling and notification for exception
-				System.exit(1);
-			} catch (NumberFormatException e) {
-				// exit since read crime data has own handling
-			 	System.exit(1);
-			} // no need for finally since scanner is closed inside of finally block of readFile method in Crime class
-		} else { // if no argument provided
-			// notify and exit
-			System.out.println("No file path argument provided. Please run the program with the file path for the crime data as an argument (ex. java CrimeTest Crime.csv).");
-			System.exit(1); // exit
-		}
-	}
+      } else if (class.equalsIgnoreCase("executive")) {
+        //
+      } else {
 
-  private static readData
+      }
+
+      // insert into array based on year
+    }
+  }
+
+  private void InsertIntoArray(int asdf, Object employee) {
+    // depending on year insert into array by iterating through
+    // and placing into first null slot
+
+  }
+
+  private static String formatName(String commaSeparatedName) {
+    String[] nameArray = commaSeparatedName.split(',');
+    String formattedName;
+    if (nameArray.length == 2) { // if last,first name
+      formattedName = nameArray[1] + " " + nameArray[0]; // arrange into <first> <last> format
+    } else { // if no commas, ex. if name is just 'Drake', 'Adel', 'Batman', etc.
+        formattedName = nameArray[0]; // set formatted name as is
+    }
+
+    return formattedName;
+  }
+
+  private static void printReport(int year) {
+
+  }
+
 }

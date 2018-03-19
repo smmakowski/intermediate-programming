@@ -5,12 +5,12 @@
   Purpose: Executive class declaration; sub of Salesman and Employee class. Contains private fields, constructor, and public methods.
 */
 
-public class Salesman extends Employee {
+public class Executive extends Employee {
   // private fields unique to subclass
   private int stockPrice; // in whole dollars
 
   //class constructor
-  public Executive(String name; int monthlySalary, int stockPrice) {
+  public Executive(String name, int monthlySalary, int stockPrice) {
     super(name, monthlySalary); // call Executive super with name and monthlySalary
     this.stockPrice = stockPrice; // assign class-unique field
   }

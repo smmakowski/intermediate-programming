@@ -12,21 +12,22 @@
   command-line argument: the path/name of the .txt file that you wish to read.
 */
 
+// import necessary classes
 import java.io.*;
 import java.util.Scanner;
 
 public class Test {
-  private static Employee[] year2014 = new Employee[10];
+  private static Employee[] year2014 = new Employee[10]; // keeps track of data for year
   private static int idx2014 = 0; // to keep track of which slots in year 2014 are filled
   private static Employee[] year2015 = new Employee[10];
   private static int idx2015 = 0; // same as idx2014 bt for 2015
 
   public static void main(String[] args) throws FileNotFoundException, NumberFormatException {
-    System.out.println("<START PROGRAM>\n");
+    System.out.println("<START PROGRAM>\n"); // start program notifier
 
     if (args.length == 0) { // if no file has been provided notify and exit
       System.out.println("ERROR: No file path has been provided.\n\n<END PROGRAM>");
-      System.exit(0); // exit with error code 1
+      System.exit(0); // exit
     }
 
     String filename = args[0]; // assign argument to filename
@@ -35,7 +36,7 @@ public class Test {
     //print reports
     printReport(2014);
     printReport(2015);
-
+    // print ending notification
     System.out.println("<END PROGRAM>");
   }
 
@@ -162,14 +163,14 @@ public class Test {
     System.out.println("\n* Average Salary for all employees for " + year + ": " + averageSalary);
     System.out.println("\n(END REPORT " + year + ")\n");
   }
-
+  // calculats salary for years
   private static int averageSalaryForYear(int totalIncome, int employeeCount) {
-    return totalIncome / employeeCount;
+    return totalIncome / employeeCount; // calc average with integer division
   }
-
+  // method to print out
   private static String printEmployeeInfo(Employee employee) {
     return "{\"className\": " + employee.getClassName() +
-     ", " + employee.toString().substring(1) + "\b, \"annualSalary()\": " +
-     employee.annualSalary() + "}";
+     ", " + employee.toString().substring(1) + "\b, \"annualSalary\": " +
+     employee.annualSalary() + "}"; // return format using concatenation of class and method returns
   }
 }

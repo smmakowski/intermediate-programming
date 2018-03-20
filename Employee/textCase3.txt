@@ -1,0 +1,3 @@
+NOTE: This file has been named wrong on purpose with a typo in
+the name. For the purpose of testing, it is used to make sure
+that proper FileNotFoundException handling is done.

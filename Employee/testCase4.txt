@@ -1,0 +1,10 @@
+2015 Salesman Tennant,David 3050 20000
+2014 Executive Goldblum,Jeff 4500 60
+2014 Employee Cartman,Eric 1000
+2015 Salesman Dwyer,Andy 4000 1000000
+2014 Executive Schrute,Dwight 5000 51
+2014 Executive Knope,Leslie 2200 65
+2015 Salesman Turner,Heidi 3800 100000
+2014 Executive Jones,Jessica 9000 55
+2020 Employee Ren,Kylo 2000
+2015 Salesman TheRadarTechnician,Matt 3000 100000

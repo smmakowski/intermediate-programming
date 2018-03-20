@@ -1,0 +1,10 @@
+2015 Employee Smith,John 2000
+2015 Salesman Jones,Bill 3000 100000
+2014 Executive Bush,George 5000 55
+2015 Executive Scott,Michael 2000 12
+2015 Salesman Ramsay,Gordon 4500a 350000
+2014 Executive Gates,Bill 6000 70
+
+NOTE: this file is used to test the NumberFormatException handling.
+There is an intentional extraneous character added to one of the
+argument to throw the exception.

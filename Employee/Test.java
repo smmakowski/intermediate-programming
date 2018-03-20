@@ -17,7 +17,9 @@ import java.util.Scanner;
 
 public class Test {
   private static Employee[] year2014 = new Employee[10];
+  private static int idx2014 = 0; // to keep track of which slots in year 2014 are filled
   private static Employee[] year2015 = new Employee[10];
+  private static int idx2015 = 0; // same as idx2014 bt for 2015
 
   public static void main(String[] args) throws FileNotFoundException, NumberFormatException {
     if (args.length == 0) { // if no file has been provided notify and exit
@@ -27,23 +29,15 @@ public class Test {
 
     String filename = args[0];
 
-    readFile(filename);
-    // try {
-    //   readFile(fileName); // read file
-    // } catch (FileNotFoundException e) { // exception handling incorrect file path
-    //   System.out.println("ERROR: The provided file is incorrect or does not exist." +
-    //   " Please make sure that you provided a correct file path argument when running this program." +
-    //   " Now exiting...");
-    //   System.exit(0);
-    // } catch (NumberFormatException e) { // exception handinling for incorrect numbers during parsing
-    //   System.out.println("ERROR: There was an error trying to parse one or more integers from '" +
-    //   fileName + "'. Please correct any typos and ensure that data in individual" +
-    //   "lines is separated by spaces.");
-    //   System.exit(0);
-    // }
+    processFile(filename); // read and parse file
+
+    for (int i = 0; i < year2014.length; i++) {
+      System.out.println(year2014[i].toString());
+    }
+
   }
 
-  private static void readFile(String filename) throws FileNotFoundException{
+  private static void processFile(String filename) throws FileNotFoundException{
     final String EMPTYSTRING = "";
     try {
       Scanner scan = new Scanner(new File(filename));
@@ -74,6 +68,7 @@ public class Test {
   private static void parseLine(String lineText) throws NumberFormatException, ArrayIndexOutOfBoundsException {
     String[] data = lineText.split(" ");
     Employee employee;
+    boolean inserted; // boolean for successful/unsuccessful insertion
     try {
       // acquire data to pass into Employee (super
       int year = Integer.parseInt(data[0]);
@@ -110,25 +105,12 @@ public class Test {
 
     // depending on year append to different arrays
     if (year == 2014) {
-      if (!year2014[9].equals(null)) { // something is in last slot
-        System.out.println("WARNING: Data slots for 2014 are full. User, " + employee.getName() + ", will not" +
-        " be added.");
-      }
-      // iterate through array
-      for (int i = 0; i < ARRAYLENGTH; i++) {
-        if (year2014[i] == null) { // upon first empty spot
-          year2014[i] = new Employee("tom", 100); // assign
-          break; // exit loop
-        }
-      }
+      year2014[idx2014] = employee; // insert
+      idx2014 += 1; // increment
     } else if (year == 2015) {
-      for (int i = 0; i < ARRAYLENGTH; i++) {
-        if (year2015[i] == null) {
-          year2015[i] = new Employee("tom", 100);
-          break;
-        }
-      }
-    } else { // if not a valid year, notify user
+      year2015[idx2015] = employee;
+      idx2015 += 1;
+    } else {
       System.out.println("WARNING: Employee, " + employee.getName() + "'s record is not from a valid" +
       "year. Record will not be added.");
     }

@@ -22,24 +22,28 @@ public class Test {
   private static int idx2015 = 0; // same as idx2014 bt for 2015
 
   public static void main(String[] args) throws FileNotFoundException, NumberFormatException {
+    System.out.println("<START PROGRAM>\n");
+
     if (args.length == 0) { // if no file has been provided notify and exit
-      System.out.println("ERROR: No file path has been provided. Now exiting...");
+      System.out.println("ERROR: No file path has been provided.\n\n<END PROGRAM>");
       System.exit(0); // exit with error code 1
     }
 
-    String filename = args[0];
+    String filename = args[0]; // assign argument to filename
 
     processFile(filename); // read and parse file
+    //print reports
+    printReport(2014);
+    printReport(2015);
 
-    for (int i = 0; i < year2014.length; i++) {
-      System.out.println(year2014[i].toString());
-    }
-
+    System.out.println("<END PROGRAM>");
   }
 
   private static void processFile(String filename) throws FileNotFoundException{
     final String EMPTYSTRING = "";
     try {
+      System.out.println("Now processing .txt file...\n");
+
       Scanner scan = new Scanner(new File(filename));
       String lineText = "";
       int i = 0;
@@ -55,11 +59,11 @@ public class Test {
         }
       }
 
-      System.out.println("File has been Successfully Read");
+      System.out.println("File has been successfully read!\n");
     } catch (FileNotFoundException e) {
       System.out.println("ERROR: The provided file is incorrect or does not exist." +
       " Please make sure that you provided a correct file path argument when running this program." +
-      " Now exiting...");
+      "\n\n<END PROGRAM>");
       System.exit(0);
     }
 
@@ -129,7 +133,43 @@ public class Test {
   }
 
   private static void printReport(int year) {
+    int employeeCount = 0;
+    int totalIncome = 0;
+    int averageSalary = 0;
+    Employee[] employees = null;
 
+    if (year == 2014) {
+      employees = year2014;
+    } else if (year == 2015) {
+      employees = year2015;
+    }
+    // print yearly report header
+    System.out.println("REPORT FOR YEAR " + year);
+    System.out.println("--------------------");
+
+    // iterate through employees for that year
+    for (int i = 0; i < employees.length; i++) {
+      if (employees[i] != null) { //if employee in index
+        employeeCount += 1; // increment counts
+        totalIncome += employees[i].annualSalary(); // add income to total
+        // print employee information including postion (Class)
+        System.out.println(printEmployeeInfo(employees[i]));
+      }
+    }
+    // get average salary
+    averageSalary = averageSalaryForYear(totalIncome, employeeCount);
+    // print average and report ending
+    System.out.println("\n* Average Salary for all employees for " + year + ": " + averageSalary);
+    System.out.println("\n(END REPORT " + year + ")\n");
   }
 
+  private static int averageSalaryForYear(int totalIncome, int employeeCount) {
+    return totalIncome / employeeCount;
+  }
+
+  private static String printEmployeeInfo(Employee employee) {
+    return "{\"className\": " + employee.getClassName() +
+     ", " + employee.toString().substring(1) + "\b, \"annualSalary()\": " +
+     employee.annualSalary() + "}";
+  }
 }

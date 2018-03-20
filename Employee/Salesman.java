@@ -32,4 +32,8 @@ public class Salesman extends Employee {
     // return baseString with additional properties ('\b' used to delete original ending bracket)
     return baseString + "\b, \"annualSales\": " + this.annualSales + "}";
   }
+
+  public String getClassName() {
+    return "Salesman";
+  }
 }

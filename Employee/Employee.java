@@ -24,12 +24,15 @@ public class Employee {
 
   // returns object string
   public String toString() {
-      return "{" + "\"monthlySalary\":" + " " + this.monthlySalary + ", \"name\":" +
-      " " + this.name + "}"; // in JSON format
+      return "{" + "\"name\": " + this.name + ", \"monthlySalary\": "
+       + this.monthlySalary + "}"; // in JSON format
   }
 
-  //Public getter for name (for use in Test.java wehn printing error messages)
   public String getName() {
     return this.name;
+  }
+
+  public String getClassName() {
+    return "Employee";
   }
 }

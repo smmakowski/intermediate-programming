@@ -28,4 +28,8 @@ public class Executive extends Employee {
     String baseString = super.toString(); // call super's .toString() method
     return baseString + "\b, \"stockPrice\": " + this.stockPrice + "}"; // return baseString with additional properties ('\b' is used to delete the original ending bracket); JSON format
   }
+
+  public String getClassName() {
+    return "Executive";
+  }
 }

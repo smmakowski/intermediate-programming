@@ -1,44 +1,44 @@
-import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Bear {
   private String family = "Ursidae";
-  private ArrayList<String> diet = new ArrayList<String>();
+  private String[] diet;
   private String color;
   private String name;
 
-  public Bear(String name, String color) {
+  public Bear(String name, String color, String[] diet) {
     this.name = name;
     this.color = color;
-    this.addToDiet("Honey");
+    this.diet = capitalizeDiet(diet); // autocapitalize diet string
   }
 
   public String toString() {
-    return "{family: \"" +  this.family + "\", diet: \"" + this.dietToString() +
-    "\", name: \"" + this.name + "\", color: \"" + this.color + "}";
+    return "{family: \"" +  this.family + "\", diet: " + this.dietToString() +
+    ", name: \"" + this.name + "\", color: \"" + this.color + "}";
   }
 
   // array stringifier to be used in and only in toString()
   private String dietToString() {
     // handle 0 and len == 1 arrays
-    if (this.diet.size() == 0) {
+    if (this.diet.length == 0) {
       return "[]";
-    } else if (this.diet.size() == 1) {
-      return "[" + this.diet.get(0) + "]";
+    } else if (this.diet.length == 1) {
+      return "[" + this.diet[0] + "]";
     }
 
     String arrayString = "["; // initiate array
     // iterate through second to last element and add element with ','
-    for (int i = 0; i < this.diet.size() - 1; i++) {
-      arrayString += this.diet.get(i) + ", ";
+    for (int i = 0; i < this.diet.length - 1; i++) {
+      arrayString += this.diet[i] + ", ";
     }
     // append final element and closing braceket
-    arrayString += this.diet.get(diet.size() -1) + "]";
+    arrayString += this.diet[this.diet.length - 1] + "]";
 
     return arrayString;
   }
   // prints statement based on whether or not food is in ArrayLsit
   public void eat(String food) {
-    if (diet.indexOf(food.toUpperCase()) == -1) {
+    if (Arrays.asList(this.diet).indexOf(food.toUpperCase()) == -1) {
       System.out.println(this.name + " can not eat " + food + ".");
     } else {
       System.out.println(this.name + " can eat " + food + ".");
@@ -46,12 +46,13 @@ public class Bear {
 
   }
 
-  // public set method for color (used in subclass to reset color after super() called in constructor)
-  public void setColor(String color) {
-    this.color = color;
-  }
-  // public modifier method to allow for changes to private diet ArrayList from subclass
-  public void addToDiet(String food) {
-    this.diet.add(food.toUpperCase());
+  // private method to auto-caps diet array contents for constructor (for case insensitivity in )
+  private static String[] capitalizeDiet(String[] diet) {
+    String[] allCapsDiet = new String[diet.length]; // init empty array copying arg array length
+    // iterate and captialize
+    for (int i = 0; i < diet.length; i++) {
+      allCapsDiet[i] = diet[i].toUpperCase();
+    }
+    return allCapsDiet;
   }
 }

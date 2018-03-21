@@ -12,9 +12,9 @@ public class SlothBear extends Bear {
     this.setColor(color + " with a White spot");
 
   }
-
+  // toString() method oversides superclasses version
   public String toString() {
     return super.toString() + "\b, genusSpecies: " + this.genusSpecies + "\b, clawLength: " +
-    this.clawLength +  "}";
+    this.clawLength +  "}"; // calls superclasses method and then augments it's return with info unique to subclass
   }
 }

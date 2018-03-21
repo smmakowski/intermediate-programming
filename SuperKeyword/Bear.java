@@ -9,6 +9,7 @@ public class Bear {
   public Bear(String name, String color) {
     this.name = name;
     this.color = color;
+    this.addToDiet("Honey");
   }
 
   public String toString() {
@@ -16,36 +17,41 @@ public class Bear {
     "\", name: \"" + this.name + "\", color: \"" + this.color + "}";
   }
 
+  // array stringifier to be used in and only in toString()
   private String dietToString() {
-    String arrayString = "[";
+    // handle 0 and len == 1 arrays
+    if (this.diet.size() == 0) {
+      return "[]";
+    } else if (this.diet.size() == 1) {
+      return "[" + this.diet.get(0) + "]";
+    }
 
+    String arrayString = "["; // initiate array
+    // iterate through second to last element and add element with ','
     for (int i = 0; i < this.diet.size() - 1; i++) {
       arrayString += this.diet.get(i) + ", ";
     }
-
+    // append final element and closing braceket
     arrayString += this.diet.get(diet.size() -1) + "]";
 
     return arrayString;
   }
-
+  // prints statement based on whether or not food is in ArrayLsit
   public void eat(String food) {
-    if (diet.indexOf(food) == -1) {
-      System.out.print(this.name + " ate the " + food + ".");
+    if (diet.indexOf(food.toUpperCase()) == -1) {
+      System.out.println(this.name + " can not eat " + food + ".");
     } else {
-      System.out.println(this.name + " cannot eat " + food + ".");
+      System.out.println(this.name + " can eat " + food + ".");
     }
 
   }
 
-  public String roar() {
-    return "Roar! I am a bear!";
-  }
-
+  // public set method for color (used in subclass to reset color after super() called in constructor)
   public void setColor(String color) {
     this.color = color;
   }
-
+  // public modifier method to allow for changes to private diet ArrayList from subclass
   public void addToDiet(String food) {
-    this.diet.add(food);
+    this.diet.add(food.toUpperCase());
   }
 }

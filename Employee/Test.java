@@ -96,12 +96,13 @@ public class Test {
     } catch (NumberFormatException e) {
       System.out.println("ERROR: There was an error trying to parse one or more integers from .txt file" +
       ". Please correct any typos and ensure that data in individual" +
-      "lines is separated by spaces.");
+      "lines is separated by spaces.\n\n<END PROGRAM>");
       System.exit(0);
     } catch (ArrayIndexOutOfBoundsException e) {
       System.out.println("ERROR: One more lines may be missing a datum, likely" +
       " the 'Annual Salary' or 'Stock Price'. Please check and make corrections to" +
-      " the .txt file.");
+      " the .txt file.\n\n<END PROGRAM>");
+      System.exit(0);
     }
   }
 

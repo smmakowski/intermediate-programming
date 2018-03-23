@@ -21,7 +21,7 @@ public class Salesman extends Employee {
     // declare/assign as return from super's .annualSalary() method
     int baseSalary = super.annualSalary();
      // declare/assign as 2% commission from annualSales [2% is 1/50th, thus division by 50]
-    int commission = this.annualSales;
+    int commission = this.annualSales / 50;
 
     return baseSalary + commission;// return
   }

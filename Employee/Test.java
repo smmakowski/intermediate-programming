@@ -22,7 +22,7 @@ public class Test {
   private static Employee[] year2015 = new Employee[10];
   private static int idx2015 = 0; // same as idx2014 bt for 2015
 
-  public static void main(String[] args) throws FileNotFoundException, NumberFormatException {
+  public static void main(String[] args) throws FileNotFoundException, NumberFormatException, ArithmeticException {
     System.out.println("<START PROGRAM>\n"); // start program notifier
 
     if (args.length == 0) { // if no file has been provided notify and exit
@@ -40,7 +40,7 @@ public class Test {
     System.out.println("<END PROGRAM>");
   }
 
-  private static void processFile(String filename) throws FileNotFoundException{
+  private static void processFile(String filename) throws FileNotFoundException {
     final String EMPTYSTRING = "";
     try {
       System.out.println("Now processing .txt file...\n");
@@ -157,10 +157,15 @@ public class Test {
         System.out.println(printEmployeeInfo(employees[i]));
       }
     }
-    // get average salary
-    averageSalary = averageSalaryForYear(totalIncome, employeeCount);
+    // get average salary if the year being processed has data
+    if ((year == 2014 && idx2014 != 0) || (year == 2015 && idx2015 != 0)){
+      averageSalary = averageSalaryForYear(totalIncome, employeeCount);
+      System.out.println("\n* Average Salary for all employees for " + year + ": " + averageSalary);
+    } else {
+      System.out.println("\n* No data available for this year!");
+    }
+
     // print average and report ending
-    System.out.println("\n* Average Salary for all employees for " + year + ": " + averageSalary);
     System.out.println("\n(END REPORT " + year + ")\n");
   }
   // calculats salary for years

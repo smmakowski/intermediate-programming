@@ -6,7 +6,8 @@
  */
 
 public class InsufficientFunds extends Exception {
-	public InsufficientFunds() {
-		super("Insufficient Funds");
+	public InsufficientFunds(String account) {
+		super("Insufficient Funds: Not enough funds available in " + 
+				account + " account to complete requested action");
 	}
 }

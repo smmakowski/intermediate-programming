@@ -95,25 +95,60 @@ public class AtmMachine extends JFrame{
         
        // add Action listeners to buttons
         withdrawButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-
-            }
+        	public void actionPerformed(ActionEvent e) throws NumberFormatException {
+	        	try {
+	    			double withdrawal =  Double.parseDouble(amountField.getText());
+	    			if (withdrawal <= 0.0) { // show OptionPane if invalid deposit amount
+	    				JOptionPane.showMessageDialog(null, "Error: '" + amountField.getText() + 
+	    	        	"' is less than or equal to zero. Please enter a positive number for deposit.", "Withdrawal Zero or Negative Number", 
+	    	        	JOptionPane.ERROR_MESSAGE);
+	        		} else { // deposit into account and notify user
+	    				boolean serviceChargeAdded = activeAccount.withdraw(withdrawal);
+	    				JOptionPane.showMessageDialog(null, "You have sucessfully withdrawn $" +
+	    				withdrawal + " from your " + activeAccount.getName() + " account. Your " + activeAccount.getName() +
+	    				" Account balance is now " + activeAccount.balance() + "." +
+	    				(serviceChargeAdded ? "A $1.50 service charged has been added for making 4 more more withdrawls during this session." : "") +
+	    				"You have made " + Integer.toString(Account.getWithdrawalCount()) + " withdrawals today.", "Withdrawal Successful",
+	    				//provides notification of withdrawl, new balance, service charge notification, and withdrawl count
+	            	    JOptionPane.PLAIN_MESSAGE);
+	    			}
+	    		} catch (NumberFormatException ex) {
+	    			JOptionPane.showMessageDialog(null, "Error: '" + amountField.getText() + 
+	    			"' is not a number. Please Enter a valid number amount for deposit.", "Deposit Not a Number", 
+	    			JOptionPane.ERROR_MESSAGE);
+	    		} catch (IllegalArgumentException ex) {
+	    			JOptionPane.showMessageDialog(null, "Error: Amount must be in multiples of $20.00 (ex. 20.00, 60.00 120.00, etc.)", "Incorrect Dollar Amount", 
+	    	    			JOptionPane.ERROR_MESSAGE);
+        		} catch (InsufficientFunds ex) {
+	    			JOptionPane.showMessageDialog(null, "Error: You do not have enough funds in your " + activeAccount.getName() + " to make this transaction.",
+	    			"Deposit Not a Number", JOptionPane.ERROR_MESSAGE);
+	        	} finally { // in either case
+	    			amountField.setText(""); // set amount field blank
+	    		}
+        	}
         });
        
         depositButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) throws NumberFormatException {
         		try {
         			double deposit =  Double.parseDouble(amountField.getText());
-        			System.out.println("Valid Deposit");
-        			if (deposit <= 0.0) {
+        			if (deposit <= 0.0) { // show OptionPane if invalid deposit amount
         				JOptionPane.showMessageDialog(null, "Error: '" + amountField.getText() + 
-        	        	"' is not a number. Please Enter a valid Dollar Amount", "Not a Number", 
+        	        	"' is less than or equal to zero. Please enter a positive number for deposit.", "Deposit Zero or Negative Number", 
         	        	JOptionPane.ERROR_MESSAGE);
+        			} else { // deposit into account and notify user
+        				activeAccount.deposit(deposit);
+        				JOptionPane.showMessageDialog(null, "You have sucessfully deposited $" +
+        				deposit + " into your " + activeAccount.getName() + " account. Your " + activeAccount.getName() +
+        				" Account balance is now " + activeAccount.balance() + ".", "Deposit Successful", 
+                	        	JOptionPane.PLAIN_MESSAGE);
         			}
-        		} catch (NumberFormatException ex) {
+        		} catch (NumberFormatException exc) {
         			JOptionPane.showMessageDialog(null, "Error: '" + amountField.getText() + 
-        			"' is not a number. Please Enter a valid Dollar Amount", "Not a Number", 
+        			"' is not a number. Please Enter a valid number amount for deposit.", "Deposit Not a Number", 
         			JOptionPane.ERROR_MESSAGE);
+        		} finally { // in either case
+        			amountField.setText(""); // set amount field blank
         		}
            }
         });

@@ -20,13 +20,14 @@ public class Account {
 		return new double[] {this.balance, amount};
 	}
 	
-	public boolean withdrawl(double amount) throws InsufficientFunds, IllegalArgumentException {
+	public boolean withdraw(double amount) throws InsufficientFunds, IllegalArgumentException {
 		// if sufficient amount in balance attempt to withdraw
 		if (hasSufficientBalance(amount)) {
 			// if amount requested not in $20's throw 'IllegalArgumentException'
 			if (amount % 20.0 != 0.0) {
 				throw new IllegalArgumentException();
 			} else { // remove amount from account balance and return amout
+				withdrawalCount += 1; // increase withdrawal count for success
 				// check if service charge necessary and if so, add charge and set true for notification
 				boolean requiresServiceCharge = false;
 				if (withdrawalCount >= 4) {
@@ -36,7 +37,6 @@ public class Account {
 					this.balance -= amount;
 				}
 				
-				withdrawalCount += 1; // increase withdrawal count for success
 				return requiresServiceCharge;
 			}
 		} else {
@@ -57,9 +57,14 @@ public class Account {
 	public double balance() {
 		return this.balance;
 	}
-	
+	// getter for account name
 	public String getName() {
 		return this.name;
+	}
+	// getter for withdrawl count
+	
+	public static int getWithdrawalCount() {
+		return withdrawalCount;
 	}
 	// helper function for determination of valid balance
 	private boolean hasSufficientBalance(double amount) {

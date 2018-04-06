@@ -121,7 +121,7 @@ public class AtmMachine extends JFrame{
 	    	    			JOptionPane.ERROR_MESSAGE);
         		} catch (InsufficientFunds ex) {
 	    			JOptionPane.showMessageDialog(null, "Error: You do not have enough funds in your " + activeAccount.getName() + " to make this transaction.",
-	    			"Deposit Not a Number", JOptionPane.ERROR_MESSAGE);
+	    			"Insufficient Funds", JOptionPane.ERROR_MESSAGE);
 	        	} finally { // in either case
 	    			amountField.setText(""); // set amount field blank
 	    		}
@@ -155,7 +155,35 @@ public class AtmMachine extends JFrame{
        
         transferButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        
+        		try {
+	    			double transfer =  Double.parseDouble(amountField.getText());
+	    			if (transfer <= 0.0) { // show OptionPane if invalid deposit amount
+	    				JOptionPane.showMessageDialog(null, "Error: '" + amountField.getText() + 
+	    	        	"' is less than or equal to zero. Please enter a positive number for deposit.", "Transfer Zero or Negative Number", 
+	    	        	JOptionPane.ERROR_MESSAGE);
+	        		} else { // deposit into account and notify user
+	        			if (activeAccount.getName().equals("Checking")) {
+	        				activeAccount.transfer(transfer, savings);
+	        			} else {
+	        				activeAccount.transfer(transfer, checking);
+	        			}
+	    				JOptionPane.showMessageDialog(null, "You have sucessfully transferred $" +
+	    				transfer + "\nfrom your " + activeAccount.getName() + " account\nto your " + (activeAccount.getName().equals("Checking") ? "Savings Account" : "Checking Account") +
+	    				".\nYour balances are\n\nChecking: " + checking.balance() + "\nSavings: " + savings.balance() 
+	    				, "Transfer Successful",
+	    				//provides notification of transfer, new balances for both accounts
+	            	    JOptionPane.PLAIN_MESSAGE);
+	    			}
+	    		} catch (NumberFormatException ex) {
+	    			JOptionPane.showMessageDialog(null, "Error: '" + amountField.getText() + 
+	    			"' is not a number. Please Enter a valid number amount for deposit.", "Deposit Not a Number", 
+	    			JOptionPane.ERROR_MESSAGE);
+        		} catch (InsufficientFunds ex) {
+	    			JOptionPane.showMessageDialog(null, "Error: You do not have enough funds in your " + activeAccount.getName() + " to make this transaction.",
+	    			"Insufficient Funds", JOptionPane.ERROR_MESSAGE);
+	        	} finally { // in either case
+	    			amountField.setText(""); // set amount field blank
+	    		}
             }
         });
         // listener opens OptionPane containing balance for currently selected account when clicked

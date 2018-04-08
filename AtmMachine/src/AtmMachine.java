@@ -82,7 +82,7 @@ public class AtmMachine extends JFrame {
 	    				JOptionPane.showMessageDialog(null, "You have sucessfully withdrawn $" +
 	    				withdrawal + " from your " + activeAccount.getName() + " account. Your " + activeAccount.getName() +
 	    				" Account balance is now " + activeAccount.balance() + "." +
-	    				(serviceChargeAdded ? "A $1.50 service charged has been added for making 4 more more withdrawls during this session." : "") +
+	    				(serviceChargeAdded ? "A $1.50 service charged has been added for making 5 more more withdrawls during this session." : "") +
 	    				"You have made " + Integer.toString(Account.getWithdrawalCount()) + " withdrawals today.", "Withdrawal Successful",
 	    				//provides notification of withdrawl, new balance, service charge notification, and withdrawl count
 	            	    JOptionPane.PLAIN_MESSAGE);

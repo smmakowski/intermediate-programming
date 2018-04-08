@@ -13,7 +13,7 @@ public class AtmMachine extends JFrame{
 	// GUI component fields
 	private JButton withdrawButton, depositButton, transferButton, balanceButton;
 	private JRadioButton checkingRadio, savingsRadio;
-	private JTextField amountField;
+	private static JTextField amountField;
 	// fields for accounts
 	private static Account activeAccount;
 	private static Account checking;
@@ -71,8 +71,6 @@ public class AtmMachine extends JFrame{
         gb.fill = GridBagConstraints.HORIZONTAL;
         checkingRadio.setFont(new Font("Serif", Font.PLAIN, 28));
         mainPanel.add(checkingRadio, gb);
-//        checkingRadio.setMnemonic(KeyEvent.VK_R);
-//        checking.setActionCommand(rabbitString);
 
         savingsRadio = new JRadioButton("Savings");
         gb.gridx = 1;
@@ -80,8 +78,6 @@ public class AtmMachine extends JFrame{
         gb.fill = GridBagConstraints.HORIZONTAL;
         savingsRadio.setFont(new Font("Serif", Font.PLAIN, 28));
         mainPanel.add(savingsRadio, gb);
-//        pigButton.setMnemonic(KeyEvent.VK_P);
-//        pigButton.setActionCommand(pigString);
 
         // Group the radio buttons.
         ButtonGroup radioGroup = new ButtonGroup();
@@ -107,9 +103,7 @@ public class AtmMachine extends JFrame{
 	        	try {
 	    			double withdrawal =  Double.parseDouble(amountField.getText());
 	    			if (withdrawal <= 0.0) { // show OptionPane if invalid deposit amount
-	    				JOptionPane.showMessageDialog(null, "Error: '" + amountField.getText() + 
-	    	        	"' is less than or equal to zero. Please enter a positive number for deposit.", "Withdrawal Zero or Negative Number", 
-	    	        	JOptionPane.ERROR_MESSAGE);
+	    				amountNotPositiveMessage();
 	        		} else { // deposit into account and notify user
 	    				boolean serviceChargeAdded = activeAccount.withdraw(withdrawal);
 	    				JOptionPane.showMessageDialog(null, "You have sucessfully withdrawn $" +
@@ -121,15 +115,12 @@ public class AtmMachine extends JFrame{
 	            	    JOptionPane.PLAIN_MESSAGE);
 	    			}
 	    		} catch (NumberFormatException ex) {
-	    			JOptionPane.showMessageDialog(null, "Error: '" + amountField.getText() + 
-	    			"' is not a number. Please Enter a valid number amount for deposit.", "Deposit Not a Number", 
-	    			JOptionPane.ERROR_MESSAGE);
+	    			notANumberMessage();
 	    		} catch (IllegalArgumentException ex) {
 	    			JOptionPane.showMessageDialog(null, "Error: Amount must be in multiples of $20.00 (ex. 20.00, 60.00 120.00, etc.)", "Incorrect Dollar Amount", 
 	    	    			JOptionPane.ERROR_MESSAGE);
         		} catch (InsufficientFunds ex) {
-	    			JOptionPane.showMessageDialog(null, "Error: You do not have enough funds in your " + activeAccount.getName() + " to make this transaction.",
-	    			"Insufficient Funds", JOptionPane.ERROR_MESSAGE);
+	    			insufficientFundsMessage();
 	        	} finally { // in either case
 	    			amountField.setText(""); // set amount field blank
 	    		}
@@ -141,9 +132,7 @@ public class AtmMachine extends JFrame{
         		try {
         			double deposit =  Double.parseDouble(amountField.getText());
         			if (deposit <= 0.0) { // show OptionPane if invalid deposit amount
-        				JOptionPane.showMessageDialog(null, "Error: '" + amountField.getText() + 
-        	        	"' is less than or equal to zero. Please enter a positive number for deposit.", "Deposit Zero or Negative Number", 
-        	        	JOptionPane.ERROR_MESSAGE);
+        				amountNotPositiveMessage();
         			} else { // deposit into account and notify user
         				activeAccount.deposit(deposit);
         				JOptionPane.showMessageDialog(null, "You have sucessfully deposited $" +
@@ -152,9 +141,7 @@ public class AtmMachine extends JFrame{
                 	        	JOptionPane.PLAIN_MESSAGE);
         			}
         		} catch (NumberFormatException exc) {
-        			JOptionPane.showMessageDialog(null, "Error: '" + amountField.getText() + 
-        			"' is not a number. Please Enter a valid number amount for deposit.", "Deposit Not a Number", 
-        			JOptionPane.ERROR_MESSAGE);
+        			notANumberMessage();
         		} finally { // in either case
         			amountField.setText(""); // set amount field blank
         		}
@@ -166,9 +153,7 @@ public class AtmMachine extends JFrame{
         		try {
 	    			double transfer =  Double.parseDouble(amountField.getText());
 	    			if (transfer <= 0.0) { // show OptionPane if invalid deposit amount
-	    				JOptionPane.showMessageDialog(null, "Error: '" + amountField.getText() + 
-	    	        	"' is less than or equal to zero. Please enter a positive number for deposit.", "Transfer Zero or Negative Number", 
-	    	        	JOptionPane.ERROR_MESSAGE);
+	    				amountNotPositiveMessage();
 	        		} else { // deposit into account and notify user
 	        			if (activeAccount.getName().equals("Checking")) {
 	        				activeAccount.transfer(transfer, savings);
@@ -183,12 +168,9 @@ public class AtmMachine extends JFrame{
 	            	    JOptionPane.PLAIN_MESSAGE);
 	    			}
 	    		} catch (NumberFormatException ex) {
-	    			JOptionPane.showMessageDialog(null, "Error: '" + amountField.getText() + 
-	    			"' is not a number. Please Enter a valid number amount for deposit.", "Deposit Not a Number", 
-	    			JOptionPane.ERROR_MESSAGE);
+	    			notANumberMessage();
         		} catch (InsufficientFunds ex) {
-	    			JOptionPane.showMessageDialog(null, "Error: You do not have enough funds in your " + activeAccount.getName() + " to make this transaction.",
-	    			"Insufficient Funds", JOptionPane.ERROR_MESSAGE);
+        			insufficientFundsMessage();
 	        	} finally { // in either case
 	    			amountField.setText(""); // set amount field blank
 	    		}
@@ -218,13 +200,34 @@ public class AtmMachine extends JFrame{
         setVisible(true);
 	}
 	
+	/*
+	 * The following methods modularize common printing error messages using jPanes during error handling
+	 */
+	private void amountNotPositiveMessage() {
+		JOptionPane.showMessageDialog(null, "Error: amount '" + amountField.getText() + 
+	    "' is less than or equal to zero. Please enter a positive number for transaction.", "Transaction Amount Zero or Negative Number", 
+	    JOptionPane.ERROR_MESSAGE);
+	}
+	
+	private void notANumberMessage() {
+		JOptionPane.showMessageDialog(null, "Error: '" + amountField.getText() + 
+		"' is not a number. Please Enter a valid number amount for transaction.", "Transaction Amount Not a Number", 
+		JOptionPane.ERROR_MESSAGE);
+	}
+	
+	private void insufficientFundsMessage() {
+		JOptionPane.showMessageDialog(null, "Error: You do not have enough funds in your " + activeAccount.getName() + " to make this transaction. " +
+		"Please add funds to your " + activeAccount.getName() + " account and try again.",
+    	"Insufficient Funds", JOptionPane.ERROR_MESSAGE);
+	}
+	
 	// main methods creates Account Instances and inits GUI
 	public static void main(String[] args) {
 		// instantiate account objects and withdrawal tracker
 		checking = new Account("Checking");
 		savings = new Account("Savings");
 		activeAccount = checking; // set active account as checking (since radio button is checking by default)
-		int withdrawlCount = 0;
+
 		// Initialize GUI
 		AtmMachine gui = new AtmMachine();
 	}

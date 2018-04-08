@@ -25,8 +25,9 @@ public class AtmMachine extends JFrame{
 		 */
 		
 		setTitle("ATM Machine");
-		setSize(400, 225);
-		// setMinimumSize(new Dimension(400, 225)); TODO Set minum and Max sizes during final styling
+		setSize(375, 250);
+		setMinimumSize(new Dimension(300, 200)); // TODO Set minum and Max sizes during final styling
+		setMaximumSize(new Dimension(450, 300));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    setLocationRelativeTo(null);
 	    // create main panel and to window, create GridBagCosntraints
@@ -39,24 +40,28 @@ public class AtmMachine extends JFrame{
         gb.gridx = 0; // set X location on grid
         gb.gridy = 0; // set Y location on grid
         gb.fill = GridBagConstraints.HORIZONTAL; // set fill for GridBag
+        withdrawButton.setFont(new Font("Serif", Font.PLAIN, 28));
         mainPanel.add(withdrawButton, gb); // add to panel
         
         depositButton = new JButton("Deposit");
         gb.gridx = 1;
         gb.gridy = 0;
         gb.fill = GridBagConstraints.HORIZONTAL;
+        depositButton.setFont(new Font("Serif", Font.PLAIN, 28));
         mainPanel.add(depositButton, gb);
         
         transferButton = new JButton("Transfer");
         gb.gridx = 0;
         gb.gridy = 1;
         gb.fill = GridBagConstraints.HORIZONTAL;
+        transferButton.setFont(new Font("Serif", Font.PLAIN, 28));
         mainPanel.add(transferButton, gb);
         
         balanceButton = new JButton("Balance");
         gb.gridx = 1;
         gb.gridy = 1;
         gb.fill = GridBagConstraints.HORIZONTAL;
+        balanceButton.setFont(new Font("Serif", Font.PLAIN, 28));
         mainPanel.add(balanceButton, gb);
         
         // create and add Radio Buttons
@@ -64,6 +69,7 @@ public class AtmMachine extends JFrame{
         gb.gridx = 0;
         gb.gridy = 2;
         gb.fill = GridBagConstraints.HORIZONTAL;
+        checkingRadio.setFont(new Font("Serif", Font.PLAIN, 28));
         mainPanel.add(checkingRadio, gb);
 //        checkingRadio.setMnemonic(KeyEvent.VK_R);
 //        checking.setActionCommand(rabbitString);
@@ -72,6 +78,7 @@ public class AtmMachine extends JFrame{
         gb.gridx = 1;
         gb.gridy = 2;
         gb.fill = GridBagConstraints.HORIZONTAL;
+        savingsRadio.setFont(new Font("Serif", Font.PLAIN, 28));
         mainPanel.add(savingsRadio, gb);
 //        pigButton.setMnemonic(KeyEvent.VK_P);
 //        pigButton.setActionCommand(pigString);
@@ -87,6 +94,7 @@ public class AtmMachine extends JFrame{
         gb.gridy = 3;
         gb.fill = GridBagConstraints.HORIZONTAL;
         gb.gridwidth = 2; // allow field to take of two cells in a row on layout
+        amountField.setFont(new Font("Serif", Font.PLAIN, 28));
         mainPanel.add(amountField, gb);
 	   
         /*

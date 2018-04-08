@@ -30,7 +30,7 @@ public class Account {
 				withdrawalCount += 1; // increase withdrawal count for success
 				// check if service charge necessary and if so, add charge and set true for notification
 				boolean requiresServiceCharge = false;
-				if (withdrawalCount >= 4) {
+				if (withdrawalCount > 4) {
 					requiresServiceCharge = true;
 					this.balance -= amount + 1.50;
 				} else { // withdraw normally without charge

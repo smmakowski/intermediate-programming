@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class AtmMachine extends JFrame{
+public class AtmMachine extends JFrame {
 	// GUI component fields
 	private static JPanel mainPanel;
 	private JButton withdrawButton, depositButton, transferButton, balanceButton;
@@ -65,7 +65,7 @@ public class AtmMachine extends JFrame{
         // create and add text field for amounts input
         amountField = new JTextField("");
         setGridAndStyleFor(amountField, 0, 3, 2);
-	   
+        
         /*
          * THE FOLLOWING CODE ADDS ACTION LISTENERS TO BUTTONS AND RADIOBUTTONS
          */

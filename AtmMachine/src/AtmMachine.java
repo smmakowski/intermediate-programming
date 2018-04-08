@@ -11,9 +11,11 @@ import javax.swing.*;
 
 public class AtmMachine extends JFrame{
 	// GUI component fields
+	private static JPanel mainPanel;
 	private JButton withdrawButton, depositButton, transferButton, balanceButton;
 	private JRadioButton checkingRadio, savingsRadio;
 	private static JTextField amountField;
+	private static GridBagConstraints gb;
 	// fields for accounts
 	private static Account activeAccount;
 	private static Account checking;
@@ -31,53 +33,29 @@ public class AtmMachine extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    setLocationRelativeTo(null);
 	    // create main panel and to window, create GridBagCosntraints
-        JPanel mainPanel = new JPanel(new GridBagLayout()); // create JPanel with GridBagLayout
+        mainPanel = new JPanel(new GridBagLayout()); // create JPanel with GridBagLayout
         getContentPane().add(mainPanel); // add panel to window
-        GridBagConstraints gb = new GridBagConstraints(); // create Constraings obj
+        gb = new GridBagConstraints(); // create Constraings obj
         
         // Create Buttons and set location, contains and style
         withdrawButton = new JButton("Withdraw"); // create button
-        gb.gridx = 0; // set X location on grid
-        gb.gridy = 0; // set Y location on grid
-        gb.fill = GridBagConstraints.HORIZONTAL; // set fill for GridBag
-        withdrawButton.setFont(new Font("Serif", Font.PLAIN, 28));
-        mainPanel.add(withdrawButton, gb); // add to panel
+        setGridAndStyleFor(withdrawButton, 0, 0, 1);
         
         depositButton = new JButton("Deposit");
-        gb.gridx = 1;
-        gb.gridy = 0;
-        gb.fill = GridBagConstraints.HORIZONTAL;
-        depositButton.setFont(new Font("Serif", Font.PLAIN, 28));
-        mainPanel.add(depositButton, gb);
+        setGridAndStyleFor(depositButton, 1, 0, 1);
         
         transferButton = new JButton("Transfer");
-        gb.gridx = 0;
-        gb.gridy = 1;
-        gb.fill = GridBagConstraints.HORIZONTAL;
-        transferButton.setFont(new Font("Serif", Font.PLAIN, 28));
-        mainPanel.add(transferButton, gb);
+        setGridAndStyleFor(transferButton, 0, 1, 1);
         
         balanceButton = new JButton("Balance");
-        gb.gridx = 1;
-        gb.gridy = 1;
-        gb.fill = GridBagConstraints.HORIZONTAL;
-        balanceButton.setFont(new Font("Serif", Font.PLAIN, 28));
-        mainPanel.add(balanceButton, gb);
+        setGridAndStyleFor(balanceButton, 1, 1, 1);
         
         // create and add Radio Buttons
         checkingRadio = new JRadioButton("Checking", true); // instantiate new RadioButton that is selected
-        gb.gridx = 0;
-        gb.gridy = 2;
-        gb.fill = GridBagConstraints.HORIZONTAL;
-        checkingRadio.setFont(new Font("Serif", Font.PLAIN, 28));
-        mainPanel.add(checkingRadio, gb);
+        setGridAndStyleFor(checkingRadio, 0, 2, 1);
 
         savingsRadio = new JRadioButton("Savings");
-        gb.gridx = 1;
-        gb.gridy = 2;
-        gb.fill = GridBagConstraints.HORIZONTAL;
-        savingsRadio.setFont(new Font("Serif", Font.PLAIN, 28));
-        mainPanel.add(savingsRadio, gb);
+        setGridAndStyleFor(savingsRadio, 1, 2, 1);
 
         // Group the radio buttons.
         ButtonGroup radioGroup = new ButtonGroup();
@@ -86,12 +64,7 @@ public class AtmMachine extends JFrame{
         
         // create and add text field for amounts input
         amountField = new JTextField("");
-        gb.gridx = 0;
-        gb.gridy = 3;
-        gb.fill = GridBagConstraints.HORIZONTAL;
-        gb.gridwidth = 2; // allow field to take of two cells in a row on layout
-        amountField.setFont(new Font("Serif", Font.PLAIN, 28));
-        mainPanel.add(amountField, gb);
+        setGridAndStyleFor(amountField, 0, 3, 2);
 	   
         /*
          * THE FOLLOWING CODE ADDS ACTION LISTENERS TO BUTTONS AND RADIOBUTTONS
@@ -221,6 +194,19 @@ public class AtmMachine extends JFrame{
     	"Insufficient Funds", JOptionPane.ERROR_MESSAGE);
 	}
 	
+	/*
+	 *  The Following method factors out the GridBagLayout settings and font style into a method
+	 */
+
+	private static void setGridAndStyleFor(JComponent component, int x, int y, int width) {
+		gb.gridx = x; // set X location on grid
+        gb.gridy = y; // set Y location on grid
+        gb.gridwidth = width;
+        gb.fill = GridBagConstraints.HORIZONTAL; // set fill for GridBag
+        component.setFont(new Font("Serif", Font.PLAIN, 28));
+        mainPanel.add(component, gb); // add to panel
+	}
+	
 	// main methods creates Account Instances and inits GUI
 	public static void main(String[] args) {
 		// instantiate account objects and withdrawal tracker
@@ -231,5 +217,4 @@ public class AtmMachine extends JFrame{
 		// Initialize GUI
 		AtmMachine gui = new AtmMachine();
 	}
-
 }

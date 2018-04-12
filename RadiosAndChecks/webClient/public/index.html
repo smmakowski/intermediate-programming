@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Survey Results</title>
+    <script src="./jquery.min.js"></script>
+  </head>
+  <body>
+    <h1>Week 5<h1>
+    <h3>Survey Results</h3>
+    <ul id="results">
+    </ul>
+    <h3>Answers</h3>
+    <ul id="answers">
+    </ul>
+  </body>
+  <script>
+    $(document).ready(() => {
+      let json = $.getJSON('./data.json', (data) => {
+        data.forEach((datum, i) => {
+          let str = JSON.stringify(datum);
+          let $li = $(`<li>${i + 1}. ${str}</li>`);
+          $('#answers').append($li);
+        });
+      });
+
+    });
+  </script>
+</html>

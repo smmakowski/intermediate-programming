@@ -13,9 +13,59 @@ public class RadiosAndCheckboxes extends JFrame {
   private JCheckBox beverageCheck, baklavaCheck, friesCheck, sauceCheck;
   private JButton orderButton;
   // event listener for main button
-  private ActionListener mainButtonListener = new ActionListener () {
+  private ActionListener orderButtonListener = new ActionListener () {
     public void actionPerformed(ActionEvent event) {
-    // do something
+      double price = 0.0;
+      String order = "<You Have Ordered>\n";
+      boolean noneSelected = true;
+
+      if (wrapRadio.isSelected()) { // set price for meal type (assumes chicken as protein)
+        price += 6.50;
+        order += "Wrap";
+      } else {
+        price += 7.50;
+        order += "Plate";
+      }
+      order += " with ";
+      // modify price if not chicken
+      if (beefRadio.isSelected()) {
+        price += 0.50;
+        order += "Beef";
+      } else if (comboRadio.isSelected()) {
+        price += 1.00;
+        order += "Combo Meat";
+      } else {
+        order += "Chicken";
+      }
+      order += "\n<Side order(s)>\n";
+      // add extras depening on addActionListener
+      if (beverageCheck.isSelected()) {
+        price += 1.00;
+        order += "- Fountain Drink\n";
+        noneSelected = false;
+      }
+      if (baklavaCheck.isSelected()) {
+        price += 2.00;
+        order += "- Baklava\n";
+        noneSelected = false;
+      }
+      if (friesCheck.isSelected()) {
+        price += 3.50;
+        order += "- French Fries\n";
+        noneSelected = false;
+      }
+      if (sauceCheck.isSelected()) {
+        price += 0.75;
+        order += "- EXTRA WHITE SAUCE!!!\n";
+        noneSelected = false;
+      }
+
+      JOptionPane.showMessageDialog(null,
+      "Thank you for ordering!\n" +
+      "Your total is : $" + price + ".\n" +
+      order + (noneSelected ? "None Selected" : ""),
+      "Order Summary",
+	    JOptionPane.PLAIN_MESSAGE);
     }
   };
   // GUI contructor
@@ -126,19 +176,13 @@ public class RadiosAndCheckboxes extends JFrame {
     friesCheck.setFont(TEXTSTYLE);
     mainPanel.add(friesCheck, gb);
 
-    sauceCheck = new JCheckBox("Extra White Sauce");
+    sauceCheck = new JCheckBox("EXTRA WHITE SAUCE");
     gb.gridx = 2;
     gb.gridy = 6;
     gb.gridwidth = 1;
     gb.fill = GridBagConstraints.HORIZONTAL;
     sauceCheck.setFont(TEXTSTYLE);
     mainPanel.add(sauceCheck, gb);
-
-    ButtonGroup addonGroup = new ButtonGroup();
-    addonGroup.add(beverageCheck);
-    addonGroup.add(baklavaCheck);
-    addonGroup.add(friesCheck);
-    addonGroup.add(sauceCheck);
 
     orderButton = new JButton("PLACE ORDER");
     gb.gridx = 0;
@@ -147,6 +191,7 @@ public class RadiosAndCheckboxes extends JFrame {
     gb.fill = GridBagConstraints.HORIZONTAL;
     orderButton.setFont(TEXTSTYLE);
     mainPanel.add(orderButton, gb);
+    orderButton.addActionListener(orderButtonListener);
 
 		setVisible(true);
   }

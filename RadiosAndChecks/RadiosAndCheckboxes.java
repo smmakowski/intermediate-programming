@@ -40,12 +40,12 @@ public class RadiosAndCheckboxes extends JFrame {
       order += "\n<Side order(s)>\n";
       // add extras depening on addActionListener
       if (beverageCheck.isSelected()) {
-        price += 1.00;
+        price += 2.00;
         order += "- Fountain Drink\n";
         noneSelected = false;
       }
       if (baklavaCheck.isSelected()) {
-        price += 2.00;
+        price += 1.00;
         order += "- Baklava\n";
         noneSelected = false;
       }
@@ -71,7 +71,7 @@ public class RadiosAndCheckboxes extends JFrame {
   // GUI contructor
   public RadiosAndCheckboxes() {
     setTitle("Halal Guys Order");
-    setSize(550, 250);
+    setSize(650, 250);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setLocationRelativeTo(null);
 
@@ -87,7 +87,7 @@ public class RadiosAndCheckboxes extends JFrame {
     typeLabel.setFont(HEADSTYLE);
     mainPanel.add(typeLabel, gb); // add to panel
 
-    wrapRadio = new JRadioButton("Wrap", true);
+    wrapRadio = new JRadioButton("Wrap ($6.50)", true);
     gb.gridx = 0; // set X location on grid
     gb.gridy = 1; // set Y location on grid
     gb.gridwidth = 1;
@@ -95,7 +95,7 @@ public class RadiosAndCheckboxes extends JFrame {
     wrapRadio.setFont(TEXTSTYLE);
     mainPanel.add(wrapRadio, gb); // add to panel
 
-    plateRadio = new JRadioButton("Plate");
+    plateRadio = new JRadioButton("Plate (+$1.00)");
     gb.gridx = 2;
     gb.gridy = 1;
     gb.gridwidth = 1;
@@ -115,7 +115,7 @@ public class RadiosAndCheckboxes extends JFrame {
     meatLabel.setFont(HEADSTYLE);
     mainPanel.add(meatLabel, gb); // add to panel
 
-    chickenRadio = new JRadioButton("Combo", true);
+    chickenRadio = new JRadioButton("Chicken", true);
     gb.gridx = 0; // set X location on grid
     gb.gridy = 3; // set Y location on grid
     gb.gridwidth = 1;
@@ -123,7 +123,7 @@ public class RadiosAndCheckboxes extends JFrame {
     chickenRadio.setFont(TEXTSTYLE);
     mainPanel.add(chickenRadio, gb); // add to panel
 
-    beefRadio = new JRadioButton("Beef", true);
+    beefRadio = new JRadioButton("Beef (+$0.50)", true);
     gb.gridx = 1;
     gb.gridy = 3;
     gb.gridwidth = 1;
@@ -131,7 +131,7 @@ public class RadiosAndCheckboxes extends JFrame {
     beefRadio.setFont(TEXTSTYLE);
     mainPanel.add(beefRadio, gb);
 
-    comboRadio = new JRadioButton("Combo", true);
+    comboRadio = new JRadioButton("Combo (+$1.00)", true);
     gb.gridx = 2;
     gb.gridy = 3;
     gb.gridwidth = 1;
@@ -152,7 +152,7 @@ public class RadiosAndCheckboxes extends JFrame {
     addonLabel.setFont(HEADSTYLE);
     mainPanel.add(addonLabel, gb); // add to panel
 
-    beverageCheck = new JCheckBox("Fountain Drink");
+    beverageCheck = new JCheckBox("Fountain Drink (+$2.00)");
     gb.gridx = 0;
     gb.gridy = 5;
     gb.gridwidth = 1;
@@ -160,7 +160,7 @@ public class RadiosAndCheckboxes extends JFrame {
     beverageCheck.setFont(TEXTSTYLE);
     mainPanel.add(beverageCheck, gb);
 
-    baklavaCheck = new JCheckBox("Baklava");
+    baklavaCheck = new JCheckBox("Baklava (+$1.00)");
     gb.gridx = 2;
     gb.gridy = 5;
     gb.gridwidth = 1;
@@ -168,7 +168,7 @@ public class RadiosAndCheckboxes extends JFrame {
     baklavaCheck.setFont(TEXTSTYLE);
     mainPanel.add(baklavaCheck, gb);
 
-    friesCheck = new JCheckBox("French Fries");
+    friesCheck = new JCheckBox("French Fries (+$3.50)");
     gb.gridx = 0;
     gb.gridy = 6;
     gb.gridwidth = 1;
@@ -176,7 +176,7 @@ public class RadiosAndCheckboxes extends JFrame {
     friesCheck.setFont(TEXTSTYLE);
     mainPanel.add(friesCheck, gb);
 
-    sauceCheck = new JCheckBox("EXTRA WHITE SAUCE");
+    sauceCheck = new JCheckBox("EXTRA WHITE SAUCE (+$0.75)");
     gb.gridx = 2;
     gb.gridy = 6;
     gb.gridwidth = 1;

@@ -4,8 +4,10 @@ import java.awt.event.*;
 
 public class RadiosAndCheckboxes extends JFrame {
   // font style constant
-  private final Font TEXTSTYLE = new Font("Arial", Font.PLAIN, 14);
-
+  private static final Font TEXTSTYLE = new Font("Arial", Font.PLAIN, 14);
+  private JRadioButton sandwichRadio, plateRadio, chickenRadio, gyroRadio, comboRadio;
+  private JCheckBox beverageCheck, baklavaCheck, friesCheck, wsauceCheck;
+  private JLabel typeLabel, addOnsLabel;
   // event listener for main button
   private ActionListener mainButtonListener = new ActionListener () {
     public void actionPerformed(ActionEvent event) {
@@ -23,63 +25,92 @@ public class RadiosAndCheckboxes extends JFrame {
     getContentPane().add(mainPanel);
     GridBagConstraints gb = new GridBagConstraints();
 
-    JRadioButton aRadio = new JRadioButton("A", true);
+    JRadioButton wrapRadio = new JRadioButton("Wrap", true);
     gb.gridx = 0; // set X location on grid
-    gb.gridy = 0; // set Y location on grid
+    gb.gridy = 1; // set Y location on grid
     gb.gridwidth = 1;
     gb.fill = GridBagConstraints.HORIZONTAL; // set fill for GridBag
-    aRadio.setFont(TEXTSTYLE);
-    mainPanel.add(aRadio, gb); // add to panel
+    wrapRadio.setFont(TEXTSTYLE);
+    mainPanel.add(wrapRadio, gb); // add to panel
 
-    JRadioButton bRadio = new JRadioButton("B", true);
-    gb.gridx = 1;
-    gb.gridy = 0;
-    gb.gridwidth = 1;
-    gb.fill = GridBagConstraints.HORIZONTAL;
-    bRadio.setFont(TEXTSTYLE);
-    mainPanel.add(bRadio, gb);
-
-    JRadioButton cRadio = new JRadioButton("C", true);
+    JRadioButton plateRadio = new JRadioButton("Plate");
     gb.gridx = 2;
-    gb.gridy = 0;
+    gb.gridy = 1;
     gb.gridwidth = 1;
     gb.fill = GridBagConstraints.HORIZONTAL;
-    cRadio.setFont(TEXTSTYLE);
-    mainPanel.add(cRadio, gb);
+    plateRadio.setFont(TEXTSTYLE);
+    mainPanel.add(plateRadio, gb);
 
-    ButtonGroup radioGroup = new ButtonGroup();
-    radioGroup.add(aRadio);
-    radioGroup.add(bRadio);
-    radioGroup.add(cRadio);
+    ButtonGroup typeGroup = new ButtonGroup();
+    typeGroup.add(wrapRadio);
+    typeGroup.add(plateRadio);
 
-    JCheckBox aCheckbox = new JCheckBox("A");
+    JRadioButton chickenRadio = new JRadioButton("Combo", true);
+    gb.gridx = 0; // set X location on grid
+    gb.gridy = 3; // set Y location on grid
+    gb.gridwidth = 1;
+    gb.fill = GridBagConstraints.HORIZONTAL; // set fill for GridBag
+    chickenRadio.setFont(TEXTSTYLE);
+    mainPanel.add(chickenRadio, gb); // add to panel
+
+    JRadioButton beefRadio = new JRadioButton("Beef", true);
+    gb.gridx = 1;
+    gb.gridy = 3;
+    gb.gridwidth = 1;
+    gb.fill = GridBagConstraints.HORIZONTAL;
+    beefRadio.setFont(TEXTSTYLE);
+    mainPanel.add(beefRadio, gb);
+
+    JRadioButton comboRadio = new JRadioButton("Combo", true);
+    gb.gridx = 2;
+    gb.gridy = 3;
+    gb.gridwidth = 1;
+    gb.fill = GridBagConstraints.HORIZONTAL;
+    comboRadio.setFont(TEXTSTYLE);
+    mainPanel.add(comboRadio, gb);
+
+    ButtonGroup meatGroup = new ButtonGroup();
+    meatGroup.add(chickenRadio);
+    meatGroup.add(beefRadio);
+    meatGroup.add(comboRadio);
+
+    JCheckBox beverageCheckbox = new JCheckBox("Fountain Drink");
     gb.gridx = 0;
-    gb.gridy = 1;
+    gb.gridy = 5;
     gb.gridwidth = 1;
     gb.fill = GridBagConstraints.HORIZONTAL;
-    aCheckbox.setFont(TEXTSTYLE);
-    mainPanel.add(aCheckbox, gb);
+    beverageCheckbox.setFont(TEXTSTYLE);
+    mainPanel.add(beverageCheckbox, gb);
 
-    JCheckBox bCheckbox = new JCheckBox("B");
-    gb.gridx = 1;
-    gb.gridy = 1;
-    gb.gridwidth = 1;
-    gb.fill = GridBagConstraints.HORIZONTAL;
-    bCheckbox.setFont(TEXTSTYLE);
-    mainPanel.add(bCheckbox, gb);
-
-    JCheckBox cCheckbox = new JCheckBox("C");
+    JCheckBox baklavaCheckbox = new JCheckBox("Baklava");
     gb.gridx = 2;
-    gb.gridy = 1;
+    gb.gridy = 5;
     gb.gridwidth = 1;
     gb.fill = GridBagConstraints.HORIZONTAL;
-    cCheckbox.setFont(TEXTSTYLE);
-    mainPanel.add(cCheckbox, gb);
+    baklavaCheckbox.setFont(TEXTSTYLE);
+    mainPanel.add(baklavaCheckbox, gb);
 
-    ButtonGroup checkboxGroup = new ButtonGroup();
-    radioGroup.add(aCheckbox);
-    radioGroup.add(bCheckbox);
-    radioGroup.add(cCheckbox);
+    JCheckBox friesCheckbox = new JCheckBox("French Fries");
+    gb.gridx = 0;
+    gb.gridy = 6;
+    gb.gridwidth = 1;
+    gb.fill = GridBagConstraints.HORIZONTAL;
+    friesCheckbox.setFont(TEXTSTYLE);
+    mainPanel.add(friesCheckbox, gb);
+
+    JCheckBox sauceCheckbox = new JCheckBox("Extra White Sauce");
+    gb.gridx = 2;
+    gb.gridy = 6;
+    gb.gridwidth = 1;
+    gb.fill = GridBagConstraints.HORIZONTAL;
+    sauceCheckbox.setFont(TEXTSTYLE);
+    mainPanel.add(sauceCheckbox, gb);
+
+    ButtonGroup addonGroup = new ButtonGroup();
+    addonGroup.add(beverageCheckbox);
+    addonGroup.add(baklavaCheckbox);
+    addonGroup.add(friesCheckbox);
+    addonGroup.add(sauceCheckbox);
 
 		setVisible(true);
   }

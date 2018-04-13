@@ -1,13 +1,17 @@
 import javax.swing.*;
+import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.*;
 
 public class RadiosAndCheckboxes extends JFrame {
   // font style constant
   private static final Font TEXTSTYLE = new Font("Arial", Font.PLAIN, 14);
-  private JRadioButton sandwichRadio, plateRadio, chickenRadio, gyroRadio, comboRadio;
-  private JCheckBox beverageCheck, baklavaCheck, friesCheck, wsauceCheck;
-  private JLabel typeLabel, addOnsLabel;
+  private static final Font HEADSTYLE = new Font("Arial", Font.ITALIC, 14);
+  private static final Font BUTTONSTYLE = new Font("Arial", Font.BOLD, 14);
+
+  private JRadioButton wrapRadio, plateRadio, chickenRadio, beefRadio, comboRadio;
+  private JCheckBox beverageCheck, baklavaCheck, friesCheck, sauceCheck;
+  private JButton orderButton;
   // event listener for main button
   private ActionListener mainButtonListener = new ActionListener () {
     public void actionPerformed(ActionEvent event) {
@@ -16,8 +20,8 @@ public class RadiosAndCheckboxes extends JFrame {
   };
   // GUI contructor
   public RadiosAndCheckboxes() {
-    setTitle("Radios and Checkboxes (Placeholder)");
-    setSize(600, 400);
+    setTitle("Halal Guys Order");
+    setSize(550, 250);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setLocationRelativeTo(null);
 
@@ -25,7 +29,15 @@ public class RadiosAndCheckboxes extends JFrame {
     getContentPane().add(mainPanel);
     GridBagConstraints gb = new GridBagConstraints();
 
-    JRadioButton wrapRadio = new JRadioButton("Wrap", true);
+    JLabel typeLabel = new JLabel("What kind of meal would you like?");
+    gb.gridx = 1; // set X location on grid
+    gb.gridy = 0; // set Y location on grid
+    gb.gridwidth = 1;
+    gb.fill = GridBagConstraints.HORIZONTAL; // set fill for GridBag
+    typeLabel.setFont(HEADSTYLE);
+    mainPanel.add(typeLabel, gb); // add to panel
+
+    wrapRadio = new JRadioButton("Wrap", true);
     gb.gridx = 0; // set X location on grid
     gb.gridy = 1; // set Y location on grid
     gb.gridwidth = 1;
@@ -33,7 +45,7 @@ public class RadiosAndCheckboxes extends JFrame {
     wrapRadio.setFont(TEXTSTYLE);
     mainPanel.add(wrapRadio, gb); // add to panel
 
-    JRadioButton plateRadio = new JRadioButton("Plate");
+    plateRadio = new JRadioButton("Plate");
     gb.gridx = 2;
     gb.gridy = 1;
     gb.gridwidth = 1;
@@ -45,7 +57,15 @@ public class RadiosAndCheckboxes extends JFrame {
     typeGroup.add(wrapRadio);
     typeGroup.add(plateRadio);
 
-    JRadioButton chickenRadio = new JRadioButton("Combo", true);
+    JLabel meatLabel = new JLabel("What kind of protein would you like?");
+    gb.gridx = 1; // set X location on grid
+    gb.gridy = 2; // set Y location on grid
+    gb.gridwidth = 3;
+    gb.fill = GridBagConstraints.HORIZONTAL; // set fill for GridBag
+    meatLabel.setFont(HEADSTYLE);
+    mainPanel.add(meatLabel, gb); // add to panel
+
+    chickenRadio = new JRadioButton("Combo", true);
     gb.gridx = 0; // set X location on grid
     gb.gridy = 3; // set Y location on grid
     gb.gridwidth = 1;
@@ -53,7 +73,7 @@ public class RadiosAndCheckboxes extends JFrame {
     chickenRadio.setFont(TEXTSTYLE);
     mainPanel.add(chickenRadio, gb); // add to panel
 
-    JRadioButton beefRadio = new JRadioButton("Beef", true);
+    beefRadio = new JRadioButton("Beef", true);
     gb.gridx = 1;
     gb.gridy = 3;
     gb.gridwidth = 1;
@@ -61,7 +81,7 @@ public class RadiosAndCheckboxes extends JFrame {
     beefRadio.setFont(TEXTSTYLE);
     mainPanel.add(beefRadio, gb);
 
-    JRadioButton comboRadio = new JRadioButton("Combo", true);
+    comboRadio = new JRadioButton("Combo", true);
     gb.gridx = 2;
     gb.gridy = 3;
     gb.gridwidth = 1;
@@ -74,43 +94,59 @@ public class RadiosAndCheckboxes extends JFrame {
     meatGroup.add(beefRadio);
     meatGroup.add(comboRadio);
 
-    JCheckBox beverageCheckbox = new JCheckBox("Fountain Drink");
+    JLabel addonLabel = new JLabel("Would you like anything else?");
+    gb.gridx = 1; // set X location on grid
+    gb.gridy = 4; // set Y location on grid
+    gb.gridwidth = 3;
+    gb.fill = GridBagConstraints.HORIZONTAL; // set fill for GridBag
+    addonLabel.setFont(HEADSTYLE);
+    mainPanel.add(addonLabel, gb); // add to panel
+
+    beverageCheck = new JCheckBox("Fountain Drink");
     gb.gridx = 0;
     gb.gridy = 5;
     gb.gridwidth = 1;
     gb.fill = GridBagConstraints.HORIZONTAL;
-    beverageCheckbox.setFont(TEXTSTYLE);
-    mainPanel.add(beverageCheckbox, gb);
+    beverageCheck.setFont(TEXTSTYLE);
+    mainPanel.add(beverageCheck, gb);
 
-    JCheckBox baklavaCheckbox = new JCheckBox("Baklava");
+    baklavaCheck = new JCheckBox("Baklava");
     gb.gridx = 2;
     gb.gridy = 5;
     gb.gridwidth = 1;
     gb.fill = GridBagConstraints.HORIZONTAL;
-    baklavaCheckbox.setFont(TEXTSTYLE);
-    mainPanel.add(baklavaCheckbox, gb);
+    baklavaCheck.setFont(TEXTSTYLE);
+    mainPanel.add(baklavaCheck, gb);
 
-    JCheckBox friesCheckbox = new JCheckBox("French Fries");
+    friesCheck = new JCheckBox("French Fries");
     gb.gridx = 0;
     gb.gridy = 6;
     gb.gridwidth = 1;
     gb.fill = GridBagConstraints.HORIZONTAL;
-    friesCheckbox.setFont(TEXTSTYLE);
-    mainPanel.add(friesCheckbox, gb);
+    friesCheck.setFont(TEXTSTYLE);
+    mainPanel.add(friesCheck, gb);
 
-    JCheckBox sauceCheckbox = new JCheckBox("Extra White Sauce");
+    sauceCheck = new JCheckBox("Extra White Sauce");
     gb.gridx = 2;
     gb.gridy = 6;
     gb.gridwidth = 1;
     gb.fill = GridBagConstraints.HORIZONTAL;
-    sauceCheckbox.setFont(TEXTSTYLE);
-    mainPanel.add(sauceCheckbox, gb);
+    sauceCheck.setFont(TEXTSTYLE);
+    mainPanel.add(sauceCheck, gb);
 
     ButtonGroup addonGroup = new ButtonGroup();
-    addonGroup.add(beverageCheckbox);
-    addonGroup.add(baklavaCheckbox);
-    addonGroup.add(friesCheckbox);
-    addonGroup.add(sauceCheckbox);
+    addonGroup.add(beverageCheck);
+    addonGroup.add(baklavaCheck);
+    addonGroup.add(friesCheck);
+    addonGroup.add(sauceCheck);
+
+    orderButton = new JButton("PLACE ORDER");
+    gb.gridx = 0;
+    gb.gridy = 7;
+    gb.gridwidth = 3;
+    gb.fill = GridBagConstraints.HORIZONTAL;
+    orderButton.setFont(TEXTSTYLE);
+    mainPanel.add(orderButton, gb);
 
 		setVisible(true);
   }

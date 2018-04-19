@@ -1,13 +1,12 @@
 import java.io.*;
-import java.util.Date;
 
 public class Recursion {
   public static void main(String[] args) {
     System.out.println("This program will create two identical sequences of numbers" +
     "using both ITERATIVE and RECURSIVE methods.");
-    System.out.println("The sequence is");
+    System.out.println("The sequence is multiples of 7.");
     System.out.println("For example, the first 10 numbers will be:");
-    System.out.println("{5, 10, 15, 20, 25, 30, 35, 40, 45, 50}");
+    System.out.println("{7, 14, 21, 28, 35, 42, 49, 56, 63, 70}");
     System.out.println("Both ITERATIVE and RECURSIVE will go through the sequence," +
     " and then print out the 10000th number in the sequence to confirm identical results.");
     System.out.println("The runtime in miliseconds will then be printed for both for comparison.");
@@ -32,7 +31,7 @@ public class Recursion {
   private static int iterativeSequence() {
     int result = 0;
     for (int i = 0; i < 10000; i++) {
-      result += 5;
+      result += 7;
     }
 
     return result;
@@ -42,7 +41,7 @@ public class Recursion {
     if (i == 0) {
       return n;
     } else {
-      return recursiveSequence(n + 5, i - 1); // return
+      return recursiveSequence(n + 7, i - 1); // return
     }
   }
 }

@@ -9,40 +9,40 @@ public class Recursion {
     System.out.println("For example, the first 10 numbers will be:");
     System.out.println("{}");
     System.out.println("Both ITERATIVE and RECURSIVE will go through the sequence," +
-    " and then print out the 10000th number in the sequence to confirm identical results.");
+    " and then print out the billionth number in the sequence to confirm identical results.");
     System.out.println("The runtime in miliseconds will then be printed for both for comparison.");
 
     System.out.println("Now running ITERATIVE Version...");
     Date iterativeStart = new Date();
-    int iterativeResult = iterativeSequence(); //TODO
+    long iterativeResult = iterativeSequence(); //TODO
     Date iterativeEnd = new Date();
-    long iterativeTime = ((iterativeStart.getTime() - iterativeEnd.getTime()) / 1000L);
+    long iterativeTime = iterativeEnd.getTime() - iterativeStart.getTime();
     System.out.println("iterativeResult: " + iterativeResult);
     System.out.println("iterativeTime: " + iterativeTime);
 
     System.out.println("Now running RECURSIVE Version...");
     Date recursiveStart = new Date();
-    int recursiveResult = recursiveSequence(); //TODO
+    long recursiveResult = recursiveSequence(0L, 10000); //TODO
     Date recursiveEnd = new Date();
-    long recursiveTime = ((recursiveStart.getTime() - recursiveEnd.getTime()) / 1000L);
+    long recursiveTime = recursiveEnd.getTime() - recursiveStart.getTime();
     System.out.println("iterativeResult: " + recursiveResult);
     System.out.println("iterativeTime: " + recursiveTime);
   }
 
-  private static int iterativeSequence() {
-    int result = 0;
-    for (int i = 0; i < 100000; i++) {
-
+  private static long iterativeSequence() {
+    long result = 0L;
+    for (int i = 0; i < 10000; i++) {
+      result += 5;
     }
 
-    return 0;
+    return result;
   }
 
-  private static int recursiveSequence() {
-    if (true) {
-      return 0;
+  private static long recursiveSequence(long n, int i) {
+    if (i == 0) {
+      return n;
     } else {
-      return 0; // return
+      return recursiveSequence(n + 5L, i - 1); // return
     }
   }
 }

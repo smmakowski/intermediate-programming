@@ -1,14 +1,15 @@
 
+
 public class Sequence {
-	public static computeIterative(int n) {
-		
+	public static int computeIterative(int n) {
+		return 0;
 	}
 	
-	public static computeRecursive(int n) {
-		
+	public static int computeRecursive(int n) {
+		return 0;
 	}
 	
-	public static getEfficiency() {
-		
+	public static int getEfficiency() {
+		return 0;
 	}
 }

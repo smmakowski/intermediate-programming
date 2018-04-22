@@ -78,12 +78,7 @@ public class Project3Gui extends JFrame {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Project3Gui gui = new Project3Gui();
-		System.out.println(Sequence.computeIterative(0));
-		System.out.println(Sequence.computeIterative(1));
-		System.out.println(Sequence.computeIterative(2));
-		System.out.println(Sequence.computeIterative(3));
-		System.out.println(Sequence.computeIterative(4));
-		System.out.println(Sequence.computeIterative(5));
+		
 	}
 
 }

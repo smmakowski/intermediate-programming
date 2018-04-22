@@ -8,6 +8,10 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import static java.nio.file.StandardOpenOption.*;
+import java.io.*;
+import java.nio.file.*;
+
 
 public class Project3Gui extends JFrame {
 	private JRadioButton iterativeRadio, recursiveRadio;
@@ -19,7 +23,43 @@ public class Project3Gui extends JFrame {
 		// create window and set gridbag for main panel
 		setTitle("Project 3");
 		setSize(375, 250);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        //window on closing function
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+            	String s = "";
+            	int result;
+            	
+            	for (int i = 0; i <= 10; i++) {
+            		result = Sequence.computeIterative(i);
+            		if (i == 10) {
+            			s += (Integer.toString(Sequence.getEfficiency()) + "\n");
+            		} else {
+            			s += (Integer.toString(Sequence.getEfficiency()) + ",");
+            		}
+            	}
+            	
+            	for (int i = 0; i <= 10; i++) {
+            		result = Sequence.computeRecursive(i);
+            		if (i == 10) {
+            			s += (Integer.toString(Sequence.getEfficiency()) + "\n");
+            		} else {
+            			s += (Integer.toString(Sequence.getEfficiency()) + ",");
+            		}
+            	}
+            	
+                byte data[] = s.getBytes();
+                Path p = Paths.get("./efficiencyData.csv");
+
+                try (OutputStream out = new BufferedOutputStream(
+                  Files.newOutputStream(p, CREATE, APPEND))) {
+                  out.write(data, 0, data.length);
+                } catch (IOException x) {
+                  System.err.println(x);
+                }
+            }
+        });
+        
 	    setLocationRelativeTo(null);
 		
 	    JPanel mainPanel = new JPanel(new GridBagLayout());

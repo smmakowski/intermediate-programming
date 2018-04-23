@@ -16,19 +16,19 @@ public class Sequence {
 			return 1;
 		}
 		
-		
+		// save data for calculation
 		int previous = 1;
 		int result = 2;
 		int temp;
 		
 		for (int i = 2; i < n; i++) {
 			efficiency += 1; // increase efficiency for every iteration of loop
-			temp = result;
-			result = (result * 2) + previous;
-			previous = temp;
+			temp = result; // set temp to result for shift
+			result = (result * 2) + previous; // calcualte new number
+			previous = temp; // shift
 		}
 		
-		return result;
+		return result; // return at end 
 	}
 	
 	public static int computeRecursive(int n) {
@@ -40,7 +40,7 @@ public class Sequence {
 			return 1;
 		}
 		
-		return nextSequence(1, 0, 1, n);
+		return nextSequence(1, 0, 1, n); // run recursive functions
 	}
 	
 	public static int getEfficiency() {

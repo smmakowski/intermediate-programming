@@ -12,7 +12,6 @@ import static java.nio.file.StandardOpenOption.*;
 import java.io.*;
 import java.nio.file.*;
 
-
 public class Project3Gui extends JFrame {
 	private JRadioButton iterativeRadio, recursiveRadio;
 	private JLabel nLabel, resultLabel, efficiencyLabel;
@@ -25,23 +24,23 @@ public class Project3Gui extends JFrame {
 		setSize(375, 250);
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         //window on closing function
-        addWindowListener(new java.awt.event.WindowAdapter() {
+        addWindowListener(new java.awt.event.WindowAdapter() { // listener object extendes windowAdapter
             public void windowClosing(java.awt.event.WindowEvent evt) {
             	String s = "";
             	int result;
             	
-            	for (int i = 0; i <= 10; i++) {
-            		result = Sequence.computeIterative(i);
-            		s += (result + ",");
-        			s += (Integer.toString(Sequence.getEfficiency()) + ",");
-        			result = Sequence.computeRecursive(i);
-        			s += (Integer.toString(Sequence.getEfficiency()) + "\n");
+            	for (int i = 0; i <= 10; i++) { // for each nth slot in sequence
+            		result = Sequence.computeIterative(i); // get nth result
+            		s += (result + ","); // add to file string
+        			s += (Integer.toString(Sequence.getEfficiency()) + ","); // add iterative efficeinty
+        			result = Sequence.computeRecursive(i); // recalculate for recurive efficiency
+        			s += (Integer.toString(Sequence.getEfficiency()) + "\n"); // add recurisve efficiency
             	}
             	
-                byte data[] = s.getBytes();
-                Path p = Paths.get("./efficiencyData.csv");
+                byte data[] = s.getBytes(); // turn into binary byte strream
+                Path p = Paths.get("./efficiencyData.csv"); // set file destination
 
-                try (OutputStream out = new BufferedOutputStream(
+                try (OutputStream out = new BufferedOutputStream( //attempt fie write
                   Files.newOutputStream(p, CREATE, APPEND))) {
                   out.write(data, 0, data.length);
                 } catch (IOException x) {
@@ -154,7 +153,7 @@ public class Project3Gui extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		// Instantiate GUI and run
 		Project3Gui gui = new Project3Gui();
 	}
 

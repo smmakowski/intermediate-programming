@@ -124,8 +124,8 @@ public class Project3Gui extends JFrame {
         	    try {
         	    	int n = Integer.parseInt(nField.getText()); // parse input
         	    	if (n < 0) { // notify user if input not valid
-        	    		JOptionPane.showMessageDialog(null, "Value entered for 'n' is not a valid number.\nPlease make sure that n is an integer\ngreater than or equal to 0.", 
-        	        	"Invalid Number", JOptionPane.PLAIN_MESSAGE);
+        	    		JOptionPane.showMessageDialog(null, "Value entered for 'n' is not greater than or equal to 0.\nPlease make sure that n is an integer\ngreater than or equal to 0.", 
+        	        	"Error: Negative Number", JOptionPane.ERROR_MESSAGE);
         	    		resultField.setText("");
         	    		efficiencyField.setText("");
         	    	} else {
@@ -141,7 +141,7 @@ public class Project3Gui extends JFrame {
         	    	}
         	    } catch (NumberFormatException ex) { // notify user if input not parseable
         	    	JOptionPane.showMessageDialog(null, "Value entered for 'n' is not a valid number.\nPlease make sure that n is an integer\ngreater than or equal to 0.", 
-        	    	"Invalid Number", JOptionPane.PLAIN_MESSAGE);
+        	    	"Error: Invalid Input", JOptionPane.ERROR_MESSAGE);
     	    		resultField.setText("");
     	    		efficiencyField.setText("");
         	    }

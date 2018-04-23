@@ -31,7 +31,7 @@ public class Project3Gui extends JFrame {
             	
             	for (int i = 0; i <= 10; i++) { // for each nth slot in sequence
             		result = Sequence.computeIterative(i); // get nth result
-            		s += (result + ","); // add to file string
+            		s += (i + ","); // add to file string
         			s += (Integer.toString(Sequence.getEfficiency()) + ","); // add iterative efficeinty
         			result = Sequence.computeRecursive(i); // recalculate for recurive efficiency
         			s += (Integer.toString(Sequence.getEfficiency()) + "\n"); // add recurisve efficiency
@@ -39,12 +39,13 @@ public class Project3Gui extends JFrame {
             	
                 byte data[] = s.getBytes(); // turn into binary byte strream
                 Path p = Paths.get("./efficiencyData.csv"); // set file destination
-
-                try (OutputStream out = new BufferedOutputStream( //attempt fie write
-                  Files.newOutputStream(p, CREATE, APPEND))) {
-                  out.write(data, 0, data.length);
-                } catch (IOException x) {
-                  System.err.println(x);
+                if (!Files.exists(p)) {
+                    try (OutputStream out = new BufferedOutputStream( //attempt fie write
+                        Files.newOutputStream(p, CREATE, APPEND))) {
+                        out.write(data, 0, data.length);
+	                  } catch (IOException x) {
+	                    System.err.println(x);
+	                  }
                 }
             }
         });
@@ -124,10 +125,10 @@ public class Project3Gui extends JFrame {
         	    try {
         	    	int n = Integer.parseInt(nField.getText()); // parse input
         	    	if (n < 0) { // notify user if input not valid
-        	    		JOptionPane.showMessageDialog(null, "Value entered for 'n' is not greater than or equal to 0.\nPlease make sure that n is an integer\ngreater than or equal to 0.", 
-        	        	"Error: Negative Number", JOptionPane.ERROR_MESSAGE);
         	    		resultField.setText("");
         	    		efficiencyField.setText("");
+        	    		JOptionPane.showMessageDialog(null, "Value entered for 'n' is not greater than or equal to 0.\nPlease make sure that n is an integer\ngreater than or equal to 0.", 
+        	        	"Error: Negative Number", JOptionPane.ERROR_MESSAGE);
         	    	} else {
         	    		int result = 0; // set result to 0
         	    		if (iterativeRadio.isSelected()) { // run interative if checked
@@ -140,6 +141,8 @@ public class Project3Gui extends JFrame {
         	    		efficiencyField.setText(Integer.toString(Sequence.getEfficiency()));
         	    	}
         	    } catch (NumberFormatException ex) { // notify user if input not parseable
+    	    		resultField.setText("");
+    	    		efficiencyField.setText("");
         	    	JOptionPane.showMessageDialog(null, "Value entered for 'n' is not a valid number.\nPlease make sure that n is an integer\ngreater than or equal to 0.", 
         	    	"Error: Invalid Input", JOptionPane.ERROR_MESSAGE);
     	    		resultField.setText("");

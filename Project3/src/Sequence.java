@@ -40,7 +40,7 @@ public class Sequence {
 			return 1;
 		}
 		
-		return nextSequence(1, 0, 1, n); // run recursive functions
+		return nextSequence(1, 0, 2, n); // run recursive functions
 	}
 	
 	public static int getEfficiency() {
@@ -48,10 +48,10 @@ public class Sequence {
 	}
 	
 	private static int nextSequence(int curr, int prev, int i, int max) {
-		efficiency += 1;// increment efficiency for eachfunction call
+		efficiency += 1;// increment efficiency for each function call
 		// recursive solution
 		if (i == max) { // base case where i has reached max, return final number after calcualtiom
-			return curr;
+			return (curr * 2) + prev;
 		} else { // recursive case, calculate next and call recursively.
 			int result = (curr * 2) + prev;
 			return nextSequence(result ,curr, i + 1, max);

@@ -22,6 +22,5 @@ img/
 # unnecesary .swp files
 *.swp
 
-# npm modules and locks
-**/node_modules/
-package-lock.json
+# Project3 efficiency data
+efficiencyData.csv

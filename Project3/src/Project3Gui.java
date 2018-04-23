@@ -32,20 +32,10 @@ public class Project3Gui extends JFrame {
             	
             	for (int i = 0; i <= 10; i++) {
             		result = Sequence.computeIterative(i);
-            		if (i == 10) {
-            			s += (Integer.toString(Sequence.getEfficiency()) + "\n");
-            		} else {
-            			s += (Integer.toString(Sequence.getEfficiency()) + ",");
-            		}
-            	}
-            	
-            	for (int i = 0; i <= 10; i++) {
-            		result = Sequence.computeRecursive(i);
-            		if (i == 10) {
-            			s += (Integer.toString(Sequence.getEfficiency()) + "\n");
-            		} else {
-            			s += (Integer.toString(Sequence.getEfficiency()) + ",");
-            		}
+            		s += (result + ",");
+        			s += (Integer.toString(Sequence.getEfficiency()) + ",");
+        			result = Sequence.computeRecursive(i);
+        			s += (Integer.toString(Sequence.getEfficiency()) + "\n");
             	}
             	
                 byte data[] = s.getBytes();

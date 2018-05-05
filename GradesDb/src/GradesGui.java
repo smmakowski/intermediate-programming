@@ -1,12 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.*;
 
 public class GradesGui extends JFrame {
 	private JComboBox crudCombo, creditCombo, gradeCombo;
 	private JLabel idLabel, nameLabel, majorLabel, crudLabel;
 	private JTextField idField, nameField, majorField;
 	private JButton processButton;
+	private HashMap<String, Student> data = new HashMap<String, Student>();
 	
 	public GradesGui() {
 		// set window paramters
@@ -85,6 +87,8 @@ public class GradesGui extends JFrame {
 		gb.fill = GridBagConstraints.HORIZONTAL;
 		mainPanel.add(processButton, gb);
 		
+		processButton.addActionListener(processButtonListener);
+		
 		String[] gradeOptions = {
 				"A",
 				"B",
@@ -100,7 +104,54 @@ public class GradesGui extends JFrame {
 		
 		setVisible(true);
 	}
+	// listener for process button
+	private ActionListener processButtonListener = new ActionListener () {
+	    public void actionPerformed(ActionEvent event) {
+	    	// get the value of 
+	    	String selected = crudCombo.getSelectedItem().toString();
+	    	if (selected.equals("Insert")) {
+	    		insert();
+	    	} else if (selected.equals("Delete")) {
+	    		delete();
+	    	} else if (selected.equals("Find")) {
+	    		find();
+	    	} else { // if 'update'
+	    		update();
+	    	}
+	    	JOptionPane.showMessageDialog(null,
+	        	     selected,
+	        	      "Order Summary",
+	        		    JOptionPane.PLAIN_MESSAGE);
+	    	
+	    }
+	};
 	
+	// private methods for crud operations
+	private void insert() {
+		
+	}
+	
+	private void delete() {
+		
+	}
+	
+	private void find() {
+		
+	}
+	
+	private void update() {
+		
+	}
+	
+	private boolean isFound() {
+		return true;
+	}
+	
+	private void displayError() {
+		
+	}
+	 
+	  
 	public static void main(String[] args) {
 		// init Gui
 		GradesGui gui = new GradesGui();

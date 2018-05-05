@@ -16,25 +16,18 @@ public class Student {
 	public void courseCompleted(String letter, double hours) {
 		double grade = 0.00;
 		// set grade based on letter
-		switch (letter) {
-			case "A":
-				grade = 4.00;
-				break;
-			case "B":
-				grade = 3.00;
-				break;
-			case "C":
-				grade = 2.00;
-				break;
-			case "D":
-				grade = 1.00;
-				break;
-			case "F":
-				grade = 0.00;
-				break;
-			default:
-				// Do Nothing; letter will always be one of above due to JComboBox restrictions
+		if (letter.equals("A")) {
+			grade = 4.00;
+		} else if (letter.equals("B")) {
+			grade = 3.00;
+		} else if (letter.equals("C")) {
+			grade = 2.00;
+		} else if (letter.equals("D")) {
+			grade = 1.00;
+		} else if (letter.equals("F")) {
+			grade = 0.00;
 		}
+
 		// increment credits and value points
 		this.credits += hours;
 		this.points += (hours * grade); // points for class is (number of hours * gpa for class)

@@ -121,11 +121,6 @@ public class GradesGui extends JFrame {
 	    	} else { // if 'update'
 	    		update();
 	    	}
-	    	JOptionPane.showMessageDialog(null,
-	        	     selected,
-	        	      "Order Summary",
-	        		    JOptionPane.PLAIN_MESSAGE);
-	    	
 	    }
 	};
 	
@@ -138,6 +133,27 @@ public class GradesGui extends JFrame {
 			"ID required for operation", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
+		// if record alread exists for ID display error message
+		if (data.containsKey(idField.getText())) {
+			JOptionPane.showMessageDialog(null, 
+			"ID is already in data base!\nPlease use different ID,\nor update/delete record",
+			"ID Already Exists", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		// if no values entered for Name and Major notify user of error
+		if (nameField.getText().equals("") || majorField.getText().equals("")) {
+			JOptionPane.showMessageDialog(null, 
+			"Name, or Major not entered.\nPlease make sure a Major are entered when\nadding students to records",
+			"Student information not enterd", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		// if no issues, create student and add, and notify of success
+		Student student = new Student(nameField.getText(), majorField.getText());
+		data.put(idField.getText(), student);
+		
+		JOptionPane.showMessageDialog(null, 
+		"Student successfully added to records!",
+		"Sucess", JOptionPane.PLAIN_MESSAGE);
 	}
 	
 	private void delete() {
@@ -146,6 +162,17 @@ public class GradesGui extends JFrame {
 			"No ID entered.\nPlease enter ID to complete operation",
 			"ID required for operation", JOptionPane.ERROR_MESSAGE);
 			return;
+		}
+		// if key found delete, else display error
+		if (data.containsKey(idField.getText())) {
+			data.remove(idField.getText());
+			JOptionPane.showMessageDialog(null, 
+			"Record sucessfully removed!",
+			"Success", JOptionPane.PLAIN_MESSAGE);
+		} else {
+			JOptionPane.showMessageDialog(null, 
+			"Student ID entered could not be found!\nPlease try a different ID.",
+			"Student Record Not Found", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
@@ -156,17 +183,15 @@ public class GradesGui extends JFrame {
 			"ID required for operation", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
-		
+		// search for key; if found invoke toString() else displau error
 		if (data.containsKey(idField.getText())) {
 			JOptionPane.showMessageDialog(null, 
-					data.get(idField.getText()).toString(),
-					"Student Found", JOptionPane.PLAIN_MESSAGE);
-					return;
+			data.get(idField.getText()).toString(),
+			"Student Found", JOptionPane.PLAIN_MESSAGE);
 		} else {
 			JOptionPane.showMessageDialog(null, 
-			"Student ID entered could not be found!\nPlease try again.",
+			"Student ID entered could not be found!\nPlease try a different ID.",
 			"Student Record Not Found", JOptionPane.ERROR_MESSAGE);
-			return;
 		}
 	}
 	

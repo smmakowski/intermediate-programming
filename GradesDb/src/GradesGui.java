@@ -10,6 +10,9 @@ public class GradesGui extends JFrame {
 	private JButton processButton;
 	private HashMap<String, Student> data = new HashMap<String, Student>();
 	
+	private boolean settingCredits;
+	private boolean settingGrade;
+	
 	public GradesGui() {
 		// set window paramters
 		setTitle("Project 4");
@@ -128,30 +131,54 @@ public class GradesGui extends JFrame {
 	
 	// private methods for crud operations
 	private void insert() {
-		
+		// if no value in ID field notify user of error
+		if (idField.getText().equals("")) {
+			JOptionPane.showMessageDialog(null, 
+			"No ID entered.\nPlease enter ID to complete operation",
+			"ID required for operation", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
 	}
 	
 	private void delete() {
-		
+		if (idField.getText().equals("")) {
+			JOptionPane.showMessageDialog(null, 
+			"No ID entered.\nPlease enter ID to complete operation",
+			"ID required for operation", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
 	}
 	
 	private void find() {
+		if (idField.getText().equals("")) {
+			JOptionPane.showMessageDialog(null, 
+			"No ID entered.\nPlease enter ID to complete operation",
+			"ID required for operation", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
 		
+		if (data.containsKey(idField.getText())) {
+			JOptionPane.showMessageDialog(null, 
+					data.get(idField.getText()).toString(),
+					"Student Found", JOptionPane.PLAIN_MESSAGE);
+					return;
+		} else {
+			JOptionPane.showMessageDialog(null, 
+			"Student ID entered could not be found!\nPlease try again.",
+			"Student Record Not Found", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
 	}
 	
 	private void update() {
-		
+		if (idField.getText().equals("")) {
+			JOptionPane.showMessageDialog(null, 
+			"No ID entered.\nPlease enter ID to complete operation",
+			"ID required for operation", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
 	}
 	
-	private boolean isFound() {
-		return true;
-	}
-	
-	private void displayError() {
-		
-	}
-	 
-	  
 	public static void main(String[] args) {
 		// init Gui
 		GradesGui gui = new GradesGui();

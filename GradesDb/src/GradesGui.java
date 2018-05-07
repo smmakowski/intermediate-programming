@@ -10,8 +10,8 @@ public class GradesGui extends JFrame {
 	private JButton processButton;
 	private HashMap<String, Student> data = new HashMap<String, Student>();
 	
-	private boolean settingCredits;
-	private boolean settingGrade;
+	private boolean settingCredits = false;
+	private boolean settingGrade = false;
 	
 	public GradesGui() {
 		// set window paramters
@@ -91,19 +91,6 @@ public class GradesGui extends JFrame {
 		mainPanel.add(processButton, gb);
 		
 		processButton.addActionListener(processButtonListener);
-		
-		String[] gradeOptions = {
-				"A",
-				"B",
-				"C",
-				"D",
-				"F"
-		};
-		
-		String[] creditOptions = {
-				"3",
-				"6"
-		};
 		
 		setVisible(true);
 	}
@@ -201,6 +188,50 @@ public class GradesGui extends JFrame {
 			"No ID entered.\nPlease enter ID to complete operation",
 			"ID required for operation", JOptionPane.ERROR_MESSAGE);
 			return;
+		}
+		
+		if (data.containsKey(idField.getText())) {
+			// Init JComboBoxes for JOptionPanes
+			String[] gradeOptions = {
+					"A",
+					"B",
+					"C",
+					"D",
+					"F"
+			};
+			
+			gradeCombo = new JComboBox(gradeOptions);
+			gradeCombo.setEditable(false);
+
+			String[] creditOptions = {
+					"3",
+					"6"
+			};
+
+			creditCombo = new JComboBox(creditOptions);
+			creditCombo.setEditable(false);
+			
+			// gather data from JOptionPanes
+		    JOptionPane.showMessageDialog(null, new Object[]{"Choose grade:", gradeCombo}, "",
+		    JOptionPane.QUESTION_MESSAGE);
+		    
+		    JOptionPane.showMessageDialog(null, new Object[]{"Choose credits:", creditCombo}, "",
+		    JOptionPane.QUESTION_MESSAGE);
+		    
+		    String grade = gradeCombo.getSelectedItem().toString();
+		    double hours = Double.parseDouble(creditCombo.getSelectedItem().toString());
+		    
+			// update records and display success notification
+		    data.get(idField.getText()).courseCompleted(grade, hours); // invoke course compelted to update
+		    
+		    JOptionPane.showMessageDialog(null, 
+			"Record successfully updated!",
+			"Success", JOptionPane.PLAIN_MESSAGE);
+		    
+		} else {
+			JOptionPane.showMessageDialog(null, 
+			"Student ID entered could not be found!\nPlease try a different ID.",
+			"Student Record Not Found", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	

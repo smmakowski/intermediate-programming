@@ -1,3 +1,9 @@
+/*
+ * Filename: StudentGui.java
+ * Author: Stephen Makowski
+ * Date: May 6, 2018
+ * Purpose: Student class wit constuctors and methods for use in Gui's  Database HashMap
+*/
 
 public class Student {
 	// instance variables

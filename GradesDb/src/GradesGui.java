@@ -1,3 +1,10 @@
+/*
+ * Filename: GradesGui.java
+ * Author: Stephen Makowski
+ * Date: May 6, 2018
+ * Purpose: Gui and event listeners for project 4
+*/
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
